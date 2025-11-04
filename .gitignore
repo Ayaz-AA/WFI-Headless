@@ -5,26 +5,30 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+.pnpm-store/
 
 # testing
 /coverage
+*.lcov
 
 # next.js
 /.next/
 /out/
+next-env.d.ts
 
 # production
 /build
 /dist
 
 # misc
-.DS_Store
 *.pem
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
 # local env files
 .env
@@ -38,7 +42,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
 
 # turbopack
 .turbo
@@ -49,11 +52,14 @@ next-env.d.ts
 *.swp
 *.swo
 *~
+*.sublime-project
+*.sublime-workspace
 
 # OS
 .DS_Store
 Thumbs.db
 desktop.ini
+.DS_Store?
 
 # Logs
 logs
@@ -79,3 +85,12 @@ pids
 
 # Yarn Integrity file
 .yarn-integrity
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.pnp.*
+
+# Lock files (optional - uncomment if you want to ignore lock files)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
