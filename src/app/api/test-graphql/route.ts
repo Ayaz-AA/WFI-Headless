@@ -34,12 +34,13 @@ export async function GET() {
         ? 'Successfully connected and fetched test-page'
         : 'Connected but test-page not found',
     });
-  } catch (error: any) {
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
       {
         success: false,
         message: 'Error testing GraphQL connection',
-        error: error.message || 'Unknown error',
+        error: errorMessage,
       },
       { status: 500 }
     );

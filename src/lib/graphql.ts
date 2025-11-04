@@ -231,14 +231,14 @@ export async function getPageHTML(slug: string) {
 export async function getPageBySlug(slug: string): Promise<WordPressPage | null> {
   try {
     // Try with URI format (with trailing slash)
-    let uri = slug.startsWith('/') ? slug : `/${slug}/`;
+    const uri = slug.startsWith('/') ? slug : `/${slug}/`;
     
     const data = await client.request<{ page: WordPressPage | null }>(
       GET_PAGE_BY_SLUG,
       { uri }
     );
     return data.page;
-  } catch (error: any) {
+  } catch (error) {
     // If URI format with trailing slash fails, try without trailing slash
     try {
       const uri = slug.startsWith('/') ? slug : `/${slug}`;
@@ -247,7 +247,7 @@ export async function getPageBySlug(slug: string): Promise<WordPressPage | null>
         { uri }
       );
       return data.page;
-    } catch (secondError: any) {
+    } catch {
       // If URI method fails, try alternative query using pages filter
       try {
         const altData = await client.request<{ pages: { nodes: WordPressPage[] } }>(
@@ -255,22 +255,23 @@ export async function getPageBySlug(slug: string): Promise<WordPressPage | null>
           { slug }
         );
         return altData.pages.nodes[0] || null;
-      } catch (thirdError: any) {
+      } catch {
         console.error('Error fetching page from WordPress:', error);
         
         // Provide more detailed error information
-        if (error.response) {
-          console.error('GraphQL Response:', error.response);
-          console.error('GraphQL Errors:', error.response.errors);
+        if (error && typeof error === 'object' && 'response' in error) {
+          const graphqlError = error as { response?: { errors?: unknown } };
+          console.error('GraphQL Response:', graphqlError.response);
+          console.error('GraphQL Errors:', graphqlError.response?.errors);
         }
         
-        if (error.message) {
+        if (error instanceof Error) {
           console.error('Error message:', error.message);
-        }
-        
-        // Check if it's a network/connection error
-        if (error.message?.includes('fetch')) {
-          console.error('Network error - check if WordPress GraphQL endpoint is accessible');
+          
+          // Check if it's a network/connection error
+          if (error.message.includes('fetch')) {
+            console.error('Network error - check if WordPress GraphQL endpoint is accessible');
+          }
         }
         
         return null;

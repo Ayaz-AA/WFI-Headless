@@ -53,7 +53,6 @@ export async function fetchWordPressPageHTML(slug: string): Promise<{
 
     // Extract the main content area (usually in #main-content or .entry-content or similar)
     // Try to find the Divi content wrapper
-    const contentRegex = /<div[^>]*class=["'][^"']*et_pb_section[^"']*["'][^>]*>[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/i;
     const contentMatch = html.match(/<div[^>]*class=["'][^"']*et_pb_section[^"']*["'][^>]*>[\s\S]*/i);
     
     let contentHTML = '';

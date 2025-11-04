@@ -16,7 +16,6 @@ interface WordPressContentProps {
 export default function WordPressContent({ page, pageHTML }: WordPressContentProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [stylesLoaded, setStylesLoaded] = useState(false);
-  const loadedStyles = useRef<Set<string>>(new Set());
   const styleElementRef = useRef<HTMLStyleElement | null>(null);
 
   useEffect(() => {
