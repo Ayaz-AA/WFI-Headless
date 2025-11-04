@@ -24,3 +24,47 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Prevent Tailwind from interfering with Divi styles */
+.et-db,
+.et-db--frontend {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.et-db--frontend * {
+  /* Allow Divi to control all styles */
+  box-sizing: border-box;
+}
+
+/* Ensure Divi sections and modules render properly */
+.et_pb_section,
+.et_pb_row,
+.et_pb_column,
+.et_pb_module,
+.et_pb_module_inner,
+.et_pb_with_border {
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Don't interfere with Divi's layout */
+.et-l,
+.et-l--post {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure Divi can use its own fonts */
+.et-db--frontend {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* Make sure Divi styles override everything */
+.et-db--frontend * {
+  font-family: inherit;
+}
