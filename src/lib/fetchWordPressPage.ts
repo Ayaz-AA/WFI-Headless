@@ -10,8 +10,10 @@ export async function fetchWordPressPageHTML(slug: string): Promise<{
   try {
     const url = `https://backend.workforceinstitute.io/${slug}/`;
     const response = await fetch(url, {
+      cache: 'no-store', // Prevent caching
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
       },
     });
 

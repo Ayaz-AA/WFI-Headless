@@ -77,6 +77,20 @@ const GET_PAGE_BY_SLUG_ALT = `
   }
 `;
 
+// Query to list all pages
+const GET_ALL_PAGES = `
+  query GetAllPages {
+    pages(first: 100) {
+      nodes {
+        id
+        title
+        slug
+        uri
+      }
+    }
+  }
+`;
+
 // Test function to verify GraphQL endpoint is accessible
 export async function testGraphQLConnection(): Promise<boolean> {
   try {
@@ -93,6 +107,106 @@ export async function testGraphQLConnection(): Promise<boolean> {
   }
 }
 
+// Helper function to replace font URLs with proxy URLs
+function replaceFontUrlsWithProxy(cssContent: string): string {
+  // Replace font URLs in url() functions with proxy URLs
+  // Pattern: url('http://backend.workforceinstitute.io/path/to/font.woff')
+  // or: url(http://backend.workforceinstitute.io/path/to/font.woff)
+  // This handles both single and double quotes, and handles query parameters
+  cssContent = cssContent.replace(
+    /url\((['"]?)(https?:\/\/backend\.workforceinstitute\.io\/[^'")]+?\/[^'")]*?\.(woff2?|ttf|otf|eot)(\?[^'")]*)?)\1\)/gi,
+    (match, quote, url) => {
+      // Extract the path after the domain
+      const pathMatch = url.match(/https?:\/\/backend\.workforceinstitute\.io\/(.+)/i);
+      if (pathMatch) {
+        const fontPath = pathMatch[1];
+        // Remove query parameters if present
+        const cleanPath = fontPath.split('?')[0];
+        return `url(${quote || ''}/api/fonts/${cleanPath}${quote || ''})`;
+      }
+      return match; // Return original if pattern doesn't match
+    }
+  );
+  
+  // Also handle URL-encoded font paths
+  cssContent = cssContent.replace(
+    /url\((['"]?)(https?%3A%2F%2Fbackend\.workforceinstitute\.io%2F[^'")]+?\.(woff2?|ttf|otf|eot))%([^'")]*)?\1\)/gi,
+    (match, quote, encodedUrl) => {
+      try {
+        const decodedUrl = decodeURIComponent(encodedUrl);
+        const pathMatch = decodedUrl.match(/https?:\/\/backend\.workforceinstitute\.io\/(.+)/i);
+        if (pathMatch) {
+          const fontPath = pathMatch[1];
+          return `url(${quote || ''}/api/fonts/${fontPath}${quote || ''})`;
+        }
+      } catch (e) {
+        // If decoding fails, return original
+      }
+      return match;
+    }
+  );
+  
+  return cssContent;
+}
+
+// Helper function to transform CSS selectors to work in Next.js context
+// Removes 'body #page-container' from selectors since we don't have that structure
+function transformCSSSelectors(cssContent: string): string {
+  // Replace 'body #page-container' with just the content (maintains specificity)
+  // This handles cases like 'body #page-container .et_pb_section .et_pb_button_0'
+  // Pattern: body (optional space) #page-container (optional space) followed by selector or comma
+  
+  // Handle: body #page-container followed by space and selector
+  cssContent = cssContent.replace(
+    /body\s+#page-container\s+/g,
+    ''
+  );
+  
+  // Handle: body#page-container (no space) followed by space and selector
+  cssContent = cssContent.replace(
+    /body#page-container\s+/g,
+    ''
+  );
+  
+  // Handle: body #page-container.selector (no space after #page-container)
+  cssContent = cssContent.replace(
+    /body\s+#page-container\./g,
+    '.'
+  );
+  
+  // Handle: body#page-container.selector (no spaces)
+  cssContent = cssContent.replace(
+    /body#page-container\./g,
+    '.'
+  );
+  
+  // Handle cases with comma-separated selectors: 'body #page-container, .other-selector'
+  cssContent = cssContent.replace(
+    /body\s+#page-container\s*,/g,
+    ''
+  );
+  
+  // Handle: body#page-container, (no space before comma)
+  cssContent = cssContent.replace(
+    /body#page-container\s*,/g,
+    ''
+  );
+  
+  // Handle cases where it's just '#page-container' without body
+  cssContent = cssContent.replace(
+    /#page-container\s+/g,
+    ''
+  );
+  
+  // Handle: #page-container.selector (no space)
+  cssContent = cssContent.replace(
+    /#page-container\./g,
+    '.'
+  );
+  
+  return cssContent;
+}
+
 // Fetch CSS content server-side to avoid CORS issues
 async function fetchCSSContent(url: string): Promise<string | null> {
   try {
@@ -100,9 +214,11 @@ async function fetchCSSContent(url: string): Promise<string | null> {
     const httpsUrl = url.replace('http://', 'https://');
     
     const response = await fetch(httpsUrl, {
-      next: { revalidate: 3600 }, // Cache for 1 hour
+      next: { revalidate: 0 }, // No cache - always fetch fresh CSS
+      cache: 'no-store', // Prevent caching
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
       },
     });
     
@@ -122,6 +238,12 @@ async function fetchCSSContent(url: string): Promise<string | null> {
       // Replace URL-encoded http://
       .replace(/http%3A%2F%2Fbackend\.workforceinstitute\.io/gi, 'https://backend.workforceinstitute.io');
     
+    // Replace font URLs with proxy URLs to avoid CORS
+    cssContent = replaceFontUrlsWithProxy(cssContent);
+    
+    // Don't transform CSS selectors - we now have #page-container wrapper to match WordPress structure
+    // cssContent = transformCSSSelectors(cssContent);
+    
     return cssContent;
   } catch (error) {
     console.error(`Failed to fetch CSS from ${url}:`, error);
@@ -133,9 +255,11 @@ async function fetchCSSContent(url: string): Promise<string | null> {
 export async function getPageHTML(slug: string) {
   try {
     const response = await fetch(`https://backend.workforceinstitute.io/${slug}/`, {
-      next: { revalidate: 60 }, // Cache for 60 seconds
+      next: { revalidate: 0 }, // No cache - always fetch fresh content
+      cache: 'no-store', // Prevent caching
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
       },
     });
     
@@ -174,7 +298,47 @@ export async function getPageHTML(slug: string) {
       let styleContent = match[1].trim();
       // Convert HTTP to HTTPS in inline styles
       styleContent = styleContent.replace(/http:\/\/backend\.workforceinstitute\.io/g, 'https://backend.workforceinstitute.io');
+      // Replace font URLs with proxy URLs
+      styleContent = replaceFontUrlsWithProxy(styleContent);
+      // Don't transform CSS selectors - we now have #page-container wrapper to match WordPress structure
+      // styleContent = transformCSSSelectors(styleContent);
       inlineStyles.push(styleContent);
+    }
+    
+    // Extract script tags (both external and inline)
+    const scripts: Array<{ src?: string; inline?: string; type?: string; defer?: boolean; async?: boolean }> = [];
+    const scriptRegex = /<script([^>]*)>([\s\S]*?)<\/script>/gi;
+    while ((match = scriptRegex.exec(html)) !== null) {
+      const scriptAttrs = match[1];
+      const scriptContent = match[2].trim();
+      
+      // Extract src attribute
+      const srcMatch = scriptAttrs.match(/src=["']([^"']+)["']/i);
+      let src = srcMatch ? srcMatch[1] : undefined;
+      
+      // Convert relative URLs to absolute and HTTP to HTTPS
+      if (src) {
+        if (!src.startsWith('http')) {
+          src = src.startsWith('/') 
+            ? `https://backend.workforceinstitute.io${src}`
+            : `https://backend.workforceinstitute.io/${src}`;
+        }
+        src = src.replace('http://', 'https://');
+      }
+      
+      // Extract other attributes
+      const hasDefer = /defer/i.test(scriptAttrs);
+      const hasAsync = /async/i.test(scriptAttrs);
+      const typeMatch = scriptAttrs.match(/type=["']([^"']+)["']/i);
+      const type = typeMatch ? typeMatch[1] : undefined;
+      
+      scripts.push({
+        src,
+        inline: scriptContent || undefined,
+        type,
+        defer: hasDefer,
+        async: hasAsync,
+      });
     }
     
     // Extract content - find the main Divi content area
@@ -221,6 +385,7 @@ export async function getPageHTML(slug: string) {
       cssLinks: [...new Set(cssLinks)],
       cssContents, // Inlined CSS content fetched server-side
       inlineStyles,
+      scripts, // Scripts extracted from WordPress page
     };
   } catch (error) {
     console.error('Error fetching page HTML:', error);
@@ -277,6 +442,19 @@ export async function getPageBySlug(slug: string): Promise<WordPressPage | null>
         return null;
       }
     }
+  }
+}
+
+// Get all pages from WordPress
+export async function getAllPages(): Promise<Array<{ id: string; title: string; slug: string; uri: string }>> {
+  try {
+    const data = await client.request<{ pages: { nodes: Array<{ id: string; title: string; slug: string; uri: string }> } }>(
+      GET_ALL_PAGES
+    );
+    return data.pages.nodes;
+  } catch (error) {
+    console.error('Error fetching all pages from WordPress:', error);
+    return [];
   }
 }
 

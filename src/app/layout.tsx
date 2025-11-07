@@ -26,6 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Divi CSS will be loaded dynamically via inline styles to avoid CORS */}
+        {/* FontAwesome is loaded via npm package */}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
