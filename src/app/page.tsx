@@ -10,7 +10,7 @@ export const revalidate = 0;
 
 // Change this to the slug of the page you want to show on the homepage
 // Set to null to show a list of all pages instead
-const HOMEPAGE_SLUG: string | null = null; // e.g., "test-page", "course-page", or null for list
+const HOMEPAGE_SLUG: string | null = "course-page"; // e.g., "test-page", "course-page", or null for list
 
 export default async function Home() {
   // If HOMEPAGE_SLUG is set, show that page

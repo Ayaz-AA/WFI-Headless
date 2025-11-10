@@ -98,6 +98,29 @@ export default function WordPressContent({ page, pageHTML }: WordPressContentPro
   const styleElementRef = useRef<HTMLStyleElement | null>(null);
   const loadedScriptsRef = useRef<Set<string>>(new Set()); // Track loaded external scripts to avoid duplicates
   const loadedInlineScriptsRef = useRef<Set<string>>(new Set()); // Track loaded inline scripts to avoid duplicates
+  const globalScriptRegistryRef = useRef<{ external: Set<string>; inline: Set<string> } | null>(null);
+
+  const getGlobalScriptRegistry = () => {
+    if (globalScriptRegistryRef.current) return globalScriptRegistryRef.current;
+    if (typeof window === 'undefined') return null;
+    const win = window as typeof window & {
+      __wpScriptRegistry?: { external: Set<string>; inline: Set<string> };
+    };
+    if (!win.__wpScriptRegistry) {
+      win.__wpScriptRegistry = {
+        external: new Set<string>(),
+        inline: new Set<string>(),
+      };
+    }
+    globalScriptRegistryRef.current = win.__wpScriptRegistry;
+    return win.__wpScriptRegistry;
+  };
+
+  const createInlineScriptHash = (content: string) => {
+    return content.length > 200
+      ? `${content.substring(0, 200)}_${content.length}`
+      : `${content}_${content.length}`;
+  };
 
   // Ensure et-pb-icon class uses FontAwesome font (FontAwesome is loaded via npm package in layout.tsx)
   useEffect(() => {
@@ -299,11 +322,27 @@ export default function WordPressContent({ page, pageHTML }: WordPressContentPro
     if (!pageHTML?.scripts || pageHTML.scripts.length === 0) return;
 
     const loadScripts = async () => {
+      const globalRegistry = getGlobalScriptRegistry();
+
       for (const script of pageHTML.scripts || []) {
         try {
           if (script.src) {
             // External script - check if already loaded
             if (loadedScriptsRef.current.has(script.src)) {
+              continue;
+            }
+
+            if (globalRegistry?.external.has(script.src)) {
+              loadedScriptsRef.current.add(script.src);
+              continue;
+            }
+
+            const existingScript = Array.from(document.querySelectorAll('script[src]')).find(
+              (existing) => existing.getAttribute('src') === script.src
+            );
+            if (existingScript) {
+              loadedScriptsRef.current.add(script.src);
+              globalRegistry?.external.add(script.src);
               continue;
             }
 
@@ -324,6 +363,7 @@ export default function WordPressContent({ page, pageHTML }: WordPressContentPro
             await new Promise<void>((resolve) => {
               scriptElement.onload = () => {
                 loadedScriptsRef.current.add(script.src!);
+                globalRegistry?.external.add(script.src!);
                 resolve();
               };
               scriptElement.onerror = () => {
@@ -335,11 +375,23 @@ export default function WordPressContent({ page, pageHTML }: WordPressContentPro
           } else if (script.inline) {
             // Inline script - check if already loaded to avoid duplicate declarations
             // Create a unique identifier from script content (first 200 chars + length for uniqueness)
-            const scriptHash = script.inline.length > 200 
-              ? `${script.inline.substring(0, 200)}_${script.inline.length}`
-              : script.inline;
+            const scriptHash = createInlineScriptHash(script.inline);
             if (loadedInlineScriptsRef.current.has(scriptHash)) {
               continue; // Skip if already loaded
+            }
+
+            if (globalRegistry?.inline.has(scriptHash)) {
+              loadedInlineScriptsRef.current.add(scriptHash);
+              continue;
+            }
+
+            const existingInline = Array.from(document.querySelectorAll('script[data-wp-inline-hash]')).find(
+              (existing) => existing.getAttribute('data-wp-inline-hash') === scriptHash
+            );
+            if (existingInline) {
+              loadedInlineScriptsRef.current.add(scriptHash);
+              globalRegistry?.inline.add(scriptHash);
+              continue;
             }
 
             // Inline script - execute it
@@ -348,12 +400,14 @@ export default function WordPressContent({ page, pageHTML }: WordPressContentPro
               scriptElement.type = script.type;
             }
             scriptElement.textContent = script.inline;
+            scriptElement.setAttribute('data-wp-inline-hash', scriptHash);
             
             // Mark as loaded before appending to prevent duplicates
             loadedInlineScriptsRef.current.add(scriptHash);
             
             try {
               document.head.appendChild(scriptElement);
+              globalRegistry?.inline.add(scriptHash);
             } catch (error) {
               // If appendChild fails, remove from tracking so it can be retried
               loadedInlineScriptsRef.current.delete(scriptHash);

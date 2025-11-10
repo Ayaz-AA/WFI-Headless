@@ -458,3 +458,217 @@ export async function getAllPages(): Promise<Array<{ id: string; title: string; 
   }
 }
 
+// Fetch header/navigation HTML directly from WordPress
+export async function getHeaderHTML() {
+  try {
+    const response = await fetch('https://backend.workforceinstitute.io/', {
+      next: { revalidate: 0 }, // No cache - always fetch fresh content
+      cache: 'no-store', // Prevent caching
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+      },
+    });
+    
+    if (!response.ok) return null;
+    
+    const html = await response.text();
+    
+    // Extract CSS links and fetch their content
+    const cssLinks: string[] = [];
+    const cssContents: string[] = [];
+    const linkRegex = /<link[^>]+rel=["']stylesheet["'][^>]+href=["']([^"']+)["'][^>]*>/gi;
+    let match;
+    
+    while ((match = linkRegex.exec(html)) !== null) {
+      let href = match[1];
+      if (!href.startsWith('http')) {
+        href = href.startsWith('/') 
+          ? `https://backend.workforceinstitute.io${href}`
+          : `https://backend.workforceinstitute.io/${href}`;
+      }
+      // Convert HTTP to HTTPS
+      href = href.replace('http://', 'https://');
+      cssLinks.push(href);
+      
+      // Fetch CSS content server-side to avoid CORS
+      const cssContent = await fetchCSSContent(href);
+      if (cssContent) {
+        cssContents.push(cssContent);
+      }
+    }
+    
+    // Extract inline styles and convert HTTP to HTTPS
+    const inlineStyles: string[] = [];
+    const styleRegex = /<style[^>]*>([\s\S]*?)<\/style>/gi;
+    while ((match = styleRegex.exec(html)) !== null) {
+      let styleContent = match[1].trim();
+      // Convert HTTP to HTTPS in inline styles
+      styleContent = styleContent.replace(/http:\/\/backend\.workforceinstitute\.io/g, 'https://backend.workforceinstitute.io');
+      // Replace font URLs with proxy URLs
+      styleContent = replaceFontUrlsWithProxy(styleContent);
+      inlineStyles.push(styleContent);
+    }
+
+    // Extract script tags (both external and inline)
+    const scripts: Array<{ src?: string; inline?: string; type?: string; defer?: boolean; async?: boolean }> = [];
+    const scriptRegex = /<script([^>]*)>([\s\S]*?)<\/script>/gi;
+    while ((match = scriptRegex.exec(html)) !== null) {
+      const scriptAttrs = match[1];
+      const scriptContent = match[2].trim();
+
+      // Extract src attribute
+      const srcMatch = scriptAttrs.match(/src=["']([^"']+)["']/i);
+      let src = srcMatch ? srcMatch[1] : undefined;
+
+      // Convert relative URLs to absolute and HTTP to HTTPS
+      if (src) {
+        if (!src.startsWith('http')) {
+          src = src.startsWith('/') 
+            ? `https://backend.workforceinstitute.io${src}`
+            : `https://backend.workforceinstitute.io/${src}`;
+        }
+        src = src.replace('http://', 'https://');
+      }
+
+      // Extract other attributes
+      const hasDefer = /defer/i.test(scriptAttrs);
+      const hasAsync = /async/i.test(scriptAttrs);
+      const typeMatch = scriptAttrs.match(/type=["']([^"']+)["']/i);
+      const type = typeMatch ? typeMatch[1] : undefined;
+
+      scripts.push({
+        src,
+        inline: scriptContent || undefined,
+        type,
+        defer: hasDefer,
+        async: hasAsync,
+      });
+    }
+    
+    // Extract header content
+    let headerHTML = '';
+    
+    const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+    const bodyClassMatch = html.match(/<body[^>]*class=["']([^"']+)["'][^>]*>/i);
+    const bodyClasses = bodyClassMatch
+      ? bodyClassMatch[1].split(/\s+/).map((cls) => cls.trim()).filter(Boolean)
+      : [];
+    if (!bodyMatch) {
+      return null;
+    }
+    
+    const bodyContent = bodyMatch[1];
+    
+    // Try multiple patterns to find header
+    // Pattern 1: Standard header tag
+    const headerMatch = bodyContent.match(/<header[^>]*>([\s\S]*?)<\/header>/i);
+    if (headerMatch) {
+      headerHTML = headerMatch[0];
+    }
+    
+    // Pattern 2: Divi header structure - find #main-header or header wrapper
+    if (!headerHTML) {
+      // Find the opening of main-header or et_header_style
+      const headerStartPattern = /<div[^>]*(?:id=["']main-header["']|class=["'][^"']*et_header_style[^"']*["']|class=["'][^"']*main-header[^"']*["'])[^>]*>/i;
+      const headerStartMatch = bodyContent.search(headerStartPattern);
+      
+      if (headerStartMatch > -1) {
+        // Find the closing div tag by counting opening/closing divs
+        let openDivs = 0;
+        let inHeader = false;
+        let headerEnd = -1;
+        
+        // Start from the opening div
+        for (let i = headerStartMatch; i < bodyContent.length; i++) {
+          const remaining = bodyContent.substring(i);
+          
+          // Check for opening div (but not self-closing like <div />)
+          if (remaining.startsWith('<div') && !remaining.match(/^<div[^>]*\/>/)) {
+            const tagEnd = remaining.indexOf('>');
+            if (tagEnd > -1) {
+              if (!inHeader) {
+                inHeader = true;
+              }
+              openDivs++;
+              i += tagEnd; // Skip past the opening tag
+            }
+          } 
+          // Check for closing div
+          else if (remaining.startsWith('</div>')) {
+            openDivs--;
+            if (inHeader && openDivs === 0) {
+              headerEnd = i + 6; // Include the closing tag
+              break;
+            }
+            i += 5; // Skip past </div>
+          }
+        }
+        
+        if (headerEnd > headerStartMatch) {
+          headerHTML = bodyContent.substring(headerStartMatch, headerEnd);
+        }
+      }
+    }
+    
+    // Pattern 3: Find content before main content starts (everything before first et_pb_section or main tag)
+    if (!headerHTML) {
+      const mainStartPattern = /<(?:main|div[^>]*id=["']main-content["']|div[^>]*class=["'][^"']*et_pb_section[^"']*["'])/i;
+      const mainStartMatch = bodyContent.search(mainStartPattern);
+      
+      if (mainStartMatch > -1) {
+        headerHTML = bodyContent.substring(0, mainStartMatch).trim();
+      }
+    }
+    
+    // Pattern 4: Try to extract navigation menu
+    if (!headerHTML) {
+      const navMenuMatch = bodyContent.match(/<nav[^>]*>([\s\S]*?)<\/nav>/i);
+      if (navMenuMatch) {
+        headerHTML = navMenuMatch[0];
+      }
+    }
+    
+    // Pattern 5: Find everything up to the first content section (before footer)
+    if (!headerHTML) {
+      const footerStart = bodyContent.indexOf('<footer');
+      if (footerStart > -1) {
+        // Get a reasonable header section (first 10000 chars or until we hit content)
+        const contentStart = bodyContent.search(/<div[^>]*class=["'][^"']*et_pb_section|<main|<article/i);
+        const headerEnd = contentStart > -1 && contentStart < footerStart ? contentStart : Math.min(10000, footerStart);
+        headerHTML = bodyContent.substring(0, headerEnd).trim();
+      }
+    }
+    
+    // Convert WordPress URLs to localhost URLs in the header HTML
+    if (headerHTML) {
+      headerHTML = headerHTML
+        // Convert href URLs - remove domain and trailing slash
+        .replace(/href=["']https?:\/\/backend\.workforceinstitute\.io\/([^"']*)["']/gi, (match, path) => {
+          const cleanPath = path.replace(/\/$/, ''); // Remove trailing slash
+          return cleanPath ? `href="/${cleanPath}"` : 'href="/"';
+        })
+        .replace(/href=["']https?:\/\/backend\.workforceinstitute\.io["']/gi, 'href="/"')
+        // Convert action URLs (forms)
+        .replace(/action=["']https?:\/\/backend\.workforceinstitute\.io\/([^"']*)["']/gi, (match, path) => {
+          const cleanPath = path.replace(/\/$/, '');
+          return cleanPath ? `action="/${cleanPath}"` : 'action="/"';
+        })
+        // Keep image and asset URLs pointing to WordPress (don't convert src)
+        .replace(/src=["']https?:\/\/backend\.workforceinstitute\.io/gi, 'src="https://backend.workforceinstitute.io');
+    }
+    
+    return {
+      html: headerHTML || '',
+      cssLinks: [...new Set(cssLinks)],
+      cssContents, // Inlined CSS content fetched server-side
+      inlineStyles,
+      bodyClasses,
+      scripts,
+    };
+  } catch (error) {
+    console.error('Error fetching header HTML:', error);
+    return null;
+  }
+}
+
