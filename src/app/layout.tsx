@@ -1,20 +1,29 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Arimo } from "next/font/google";
 import "./globals.css";
+import "@/styles/sections.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const arimo = Arimo({
   subsets: ["latin"],
+  variable: "--font-arimo",
+  display: "swap",
 });
+
+// Note: Bayon font is not available on Google Fonts
+// You may need to add it locally or use a similar font
+// For now, we'll use a fallback
 
 export const metadata: Metadata = {
-  title: "WFI - Workforce Institute",
-  description: "Workforce Institute",
+  title: "Workforce Institute - Professional Training & Career Support",
+  description: "Empowering professionals through expert-led training and career support. Join thousands who have transformed their careers with us.",
 };
 
 export default function RootLayout({
@@ -23,15 +32,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        {/* Divi CSS will be loaded dynamically via inline styles to avoid CORS */}
-        {/* FontAwesome is loaded via npm package */}
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" className={`${inter.variable} ${arimo.variable}`}>
+      <body className="font-inter">
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
