@@ -5,7 +5,7 @@ export default function CTASection() {
         <div className="flex flex-col md:flex-row gap-12 md:items-center">
           {/* Left Content */}
           <div className="md:flex-1">
-            <h2 className="text-[55.2px] leading-[60px] font-['Inter'] font-medium text-white tracking-[-2.4px] mb-6">
+            <h2 className="text-[55.2px] leading-[60px] font-['Bayon'] text-white tracking-[-2.4px] mb-6">
               Faster outputs.
               <br />
               Better outcomes.

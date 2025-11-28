@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Arimo } from "next/font/google";
+import { Inter, Arimo, Bayon } from "next/font/google";
 import "./globals.css";
 import "@/styles/sections.css";
 import Header from "@/components/Header";
@@ -17,9 +17,12 @@ const arimo = Arimo({
   display: "swap",
 });
 
-// Note: Bayon font is not available on Google Fonts
-// You may need to add it locally or use a similar font
-// For now, we'll use a fallback
+const bayon = Bayon({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-bayon",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Workforce Institute - Professional Training & Career Support",
@@ -32,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${arimo.variable}`}>
+    <html lang="en" className={`${inter.variable} ${arimo.variable} ${bayon.variable}`}>
       <body className="font-inter">
         <Header />
         {children}

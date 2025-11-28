@@ -27,12 +27,17 @@ body {
   font-family: var(--font-arimo), sans-serif;
 }
 
-/* Bayon font - using system font as fallback until local font is added */
+/* Bayon headline font */
 .font-bayon,
 [class*="font-['Bayon']"] {
-  font-family: 'Arial Black', 'Arial Bold', Arial, sans-serif;
+  font-family: var(--font-bayon), 'Arial Black', 'Arial Bold', Arial, sans-serif;
   font-weight: 400;
   letter-spacing: -0.02em;
+}
+
+/* Apply Bayon to all main headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-bayon), 'Arial Black', 'Arial Bold', Arial, sans-serif;
 }
 
 /* Ensure font-arimo is applied where needed */
@@ -50,46 +55,7 @@ body {
   display: none;
 }
 
-/* Font loading - using system fonts as fallback */
-@font-face {
-  font-family: 'Bayon';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Bayon'), local('Bayon-Regular');
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Inter'), local('Inter-Regular');
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: local('Inter Medium'), local('Inter-Medium');
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: local('Inter SemiBold'), local('Inter-SemiBold');
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: local('Inter Bold'), local('Inter-Bold');
-}
+/* Bayon font is loaded via next/font/google in layout.tsx */
 
 @font-face {
   font-family: 'Arimo';

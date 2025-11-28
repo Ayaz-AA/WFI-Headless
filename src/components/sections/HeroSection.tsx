@@ -8,7 +8,9 @@ export default function HeroSection() {
   return (
     <section className="hero-section">
       <div className="hero-container">
-        <p className="hero-background-text">Where Innovation Meets</p>
+        <p className="hero-background-text" aria-hidden="true">
+          Where Innovation Meets
+        </p>
 
         <div className="hero-grid">
           <div className="hero-text-column">
@@ -18,10 +20,10 @@ export default function HeroSection() {
             </button>
 
             <div className="hero-headline-group">
-              <div className="hero-title-block">
-                <span>Where</span>
-                <span>Innovation</span>
-                <span>Meets</span>
+              <div className="hero-title-block" aria-label="Where innovation meets">
+                <span>WHERE</span>
+                <span>INNOVATION</span>
+                <span>MEETS</span>
               </div>
               <p className="hero-description">
                 Empowers professionals through expert-led training and career support.
@@ -31,25 +33,17 @@ export default function HeroSection() {
 
           <div className="hero-image-column">
             <div className="hero-image-frame">
-              <Image src={assets.heroMain} alt="Hero illustration" fill priority />
+              <Image
+                src={assets.heroMain}
+                alt="Futuristic professional"
+                fill
+                priority
+                sizes="(max-width: 1024px) 90vw, 640px"
+              />
             </div>
             <p className="hero-headline-accent">Tomorrow&apos;s Workforce.</p>
             <HeroCircularText />
-
-            <div className="hero-rating-card hero-rating-card-floating">
-              <div className="hero-rating-card-avatars">
-                <Image src={assets.userAvatar1} alt="user avatar" width={48} height={48} />
-                <Image src={assets.userAvatar2} alt="user avatar" width={48} height={48} />
-                <Image src={assets.userAvatar2} alt="user avatar" width={48} height={48} />
-              </div>
-              <div>
-                <p className="hero-rating-card-title">Trusted By 50k+ Users</p>
-                <div className="hero-rating-card-meta">
-                  <Image src={assets.starsRating} alt="rating" width={120} height={24} />
-                  <span>Rate (5 / 4.5)</span>
-                </div>
-              </div>
-            </div>
+            <HeroTrustSignal />
           </div>
         </div>
       </div>
@@ -69,5 +63,27 @@ function HeroCircularText() {
         </textPath>
       </text>
     </svg>
+  );
+}
+
+function HeroTrustSignal() {
+  return (
+    <div className="hero-trust-cluster" aria-label="Trusted by learners worldwide">
+      <div className="hero-trust-avatars">
+        <Image src={assets.userAvatar1} alt="User avatar" width={48} height={48} />
+        <Image src={assets.userAvatar2} alt="User avatar" width={48} height={48} />
+        <Image src={assets.userAvatar2} alt="User avatar" width={48} height={48} />
+      </div>
+      <span className="hero-trust-line" aria-hidden="true" />
+      <div className="hero-trust-copy">
+        <p>
+          Trusted By <strong>50k+ Users</strong>
+        </p>
+        <div className="hero-trust-rating">
+          <Image src={assets.starsRating} alt="Rating 4.5 out of 5" width={120} height={24} />
+          <span>Rate (5 / 4.5)</span>
+        </div>
+      </div>
+    </div>
   );
 }
