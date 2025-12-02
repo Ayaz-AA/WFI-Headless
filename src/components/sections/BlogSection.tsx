@@ -37,11 +37,11 @@ export default function BlogSection() {
   ];
 
   return (
-    <section id="blogs" className="py-20 bg-white">
-      <div className="max-w-[1440px] mx-auto px-5 md:px-20">
+    <section id="blogs" className="blog-section">
+      <div className="blog-container">
         {/* Featured Blog Post */}
-        <div className="flex flex-col lg:flex-row gap-12 mb-20">
-          <div className="relative h-[375px] lg:flex-1">
+        <div className="blog-featured">
+          <div className="blog-featured-image">
             <Image
               src={assets.blogFeatured}
               alt="Featured blog"
@@ -49,29 +49,29 @@ export default function BlogSection() {
               className="object-cover rounded-lg"
             />
           </div>
-          <div className="space-y-6 lg:flex-1">
-            <h2 className="text-[68px] leading-[70px] font-['Bayon'] text-black tracking-[1px]">
+          <div className="blog-featured-content">
+            <h2 className="blog-featured-title">
               Future of ai in software development
             </h2>
-            <p className="text-[16px] leading-[23px] text-[#364153] max-w-[354px]">
+            <p className="blog-featured-text">
               Plus, Workforce Institute provides comprehensive career support services to students after program completion. Contact our team today to discover the perfect program for your goals
             </p>
-            <div className="flex items-center gap-2 text-[#090914] text-xl font-bold">
+            <a href="#" className="blog-featured-link">
               <span>Continue Reading</span>
-              <ArrowContinue className="w-8 h-8" />
-            </div>
+              <ArrowContinue className="blog-featured-link-icon" />
+            </a>
           </div>
         </div>
 
-        {/* Blog Posts Grid */}
-        <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
+        {/* Blog Posts List */}
+        <div className="blog-list">
           {blogPosts.map((post, index) => (
             <div
               key={index}
-              className="bg-[#f7f9fc] border border-gray-200 border-solid rounded-[6px] p-4 min-w-[363px] flex-shrink-0"
+              className="blog-card"
             >
-              <div className="flex gap-4">
-                <div className="relative w-[115px] h-[102px] flex-shrink-0">
+              <div className="blog-card-content">
+                <div className="blog-card-image">
                   <Image
                     src={post.image}
                     alt={post.title}
@@ -79,16 +79,16 @@ export default function BlogSection() {
                     className="object-cover rounded-lg"
                   />
                 </div>
-                <div className="flex-1">
-                  <div className="bg-[#f8dbcb] inline-block px-3 py-1 rounded-[2px] mb-2">
-                    <span className="text-[#d46527] text-[8px] font-bold">
+                <div className="blog-card-text">
+                  <div className="blog-card-category">
+                    <span className="blog-card-category-text">
                       {post.category}
                     </span>
                   </div>
-                  <h3 className="text-lg font-semibold text-black mb-2 line-clamp-2">
+                  <h3 className="blog-card-title">
                     {post.title}
                   </h3>
-                  <p className="text-sm text-[#888d90] font-medium">
+                  <p className="blog-card-date">
                     {post.date}
                   </p>
                 </div>

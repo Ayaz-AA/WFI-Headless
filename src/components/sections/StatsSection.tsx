@@ -7,15 +7,15 @@ export default function StatsSection() {
   ];
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-[1282px] mx-auto px-5 md:px-20">
-        <div className="flex flex-wrap gap-10 md:gap-16">
+    <section className="stats-section">
+      <div className="stats-container">
+        <div className="stats-list">
           {stats.map((stat, index) => (
-            <div key={index} className="text-center flex-1 basis-1/2 md:basis-1/4">
-              <h3 className="text-[56px] leading-[56px] font-['Arimo'] text-black tracking-[-1.4px] mb-2">
+            <div key={index} className="stats-item">
+              <h3 className="stats-value">
                 {stat.value}
               </h3>
-              <p className="text-[15px] leading-[22.5px] font-['Arimo'] text-[#6a7282]">
+              <p className="stats-label">
                 {stat.label}
               </p>
             </div>

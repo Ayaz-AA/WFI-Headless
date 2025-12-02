@@ -30,17 +30,16 @@ export default function HeroSection() {
               </p>
             </div>
           </div>
-
+          <div className="hero-image-frame">
+            <img
+              src={assets.heroMain}
+              alt="Futuristic professional"
+              width={500}
+              style={{ height: 'auto' }}
+            />
+          </div>
           <div className="hero-image-column">
-            <div className="hero-image-frame">
-              <Image
-                src={assets.heroMain}
-                alt="Futuristic professional"
-                fill
-                priority
-                sizes="(max-width: 1024px) 90vw, 640px"
-              />
-            </div>
+           
             <p className="hero-headline-accent">Tomorrow&apos;s Workforce.</p>
             <HeroCircularText />
             <HeroTrustSignal />
