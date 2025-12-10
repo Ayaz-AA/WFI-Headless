@@ -73,3 +73,10 @@ export const LineDecor = ({ className = "w-20 h-px" }: { className?: string }) =
   </svg>
 );
 
+export const CheckCircle = ({ className = "w-7 h-7" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="13.5" cy="13.5" r="12" stroke="#2563EB" strokeWidth="1.5"/>
+    <path d="M9 13.5L12 16.5L18 10.5" stroke="#2563EB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+

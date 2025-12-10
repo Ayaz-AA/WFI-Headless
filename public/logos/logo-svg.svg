@@ -1,0 +1,1036 @@
+<section class="banner-area bg-gray text-center" id="hero_section">
+    <div class="banner">
+  <style>
+.video-background video {
+    width: 100%;
+    height: 85vh;
+    object-fit: cover;
+    display: block;
+}
+</style>      
+<div class="video-background">
+<video autoplay muted loop>
+  <source src="https://workforceinstitute.io/pub/media/video/Successful-business-meeting-of-people-discussing.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+</div>
+
+        <!-- Black Overlay -->
+        <div class="overlay"></div>
+
+        <!-- Banner Content -->
+        <div class="content">
+            <h1>Where Innovation Meets Tomorrow’s Workforce.</h1>
+            <p>Empowers professionals through expert-led training and career support.</p>
+        </div>
+    </div>
+    </div>
+</section>
+
+<div class="up-logos default-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Top <span>University</span> Partners</h2>
+                    <!-- <p>We partner with leading universities nationwide to prepare our learners for successful careers in the most exciting IT fields.</p> -->
+                    <div class="up-logos-listing">
+
+ <a href="https://uta.workforceinstitute.io/" title="UTA Workforce Institute website" target="_blank" rel="noopener">
+<img src="{{media url=&quot;wysiwyg/infortis/uta-logo-v2_02_2_.png&quot;}}" alt="" />
+</a>
+                        <a href="https://hofstra.workforceinstitute.io/" title="Hofstra Workforce Institute website" target="_blank" rel="noopener">
+<img src="{{media url=&quot;wysiwyg/infortis/hofstra-logo.png&quot;}}" alt="" />
+</a>
+                        <a href="https://neiu.workforceinstitute.io/" title="NEIU Workforce Institute website" rel="noopener" target="_blank">
+                            <picture class="mfwebp">
+                                <source loading="lazy" type="image/webp"
+                                    srcset="https://workforceinstitute.io/pub/media/wysiwyg/partner-3.png">
+                                <img data-webpconverted="1"
+                                    src="https://workforceinstitute.io/pub/media/wysiwyg/partner-5.png"
+                                    loading="lazy" alt="neiu logo">
+                            </picture>
+                        </a>
+                        <a href="https://scu.workforceinstitute.io/" target="_blank">
+                            <img src="{{media url=&quot;wysiwyg/santa.png&quot;}}" alt="" loading="lazy" alt="smc logo"
+                                class="lg" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div
+        class="about-area team-training inc-fixed-bg default-padding-bottom default-padding-top bg-color-custom z_index">
+        <!-- Fixed BG -->
+        <div class="fixed-bg three-people"
+            style="background-image: url('https://di3xp7dfi3cq.cloudfront.net/media/wysiwyg/marketing/home-page/teams-bg.webp');"
+            data-bg-img="false"></div>
+        <!-- End Fixed BG -->
+        <div class="container">
+            <div class="about-items">
+                <div class="row align-center">
+                    <div class="col-lg-6 info dflex">
+                        <h2 class=""><span>Training Solutions</span><br>
+                            For Every Team </h2>
+                        <p class="highlighted">Workforce Institute is the premier destination for training, staffing,
+                            executive education, and career
+                            transitions. We empower professionals to build fulfilling careers through project-driven
+                            learning, peer
+                            collaboration, and guidance from expert instructors and coaches.</p>
+
+                        <!--Don't Remove-->
+
+                        <div class="choose-us-area">
+                            <div class="item-box">
+                                <div class="right-info">
+                                    <ul>
+                                        <li>
+<a href="https://workforceinstitute.io/generative-ai-data-analyst" title="Online data science and generative AI program">
+                                            <img src="{{media url=&quot;wysiwyg/work-forc-institute-1.jpg&quot;}}" alt="" loading="lazy" />
+</a>
+                                            <div class="content">
+                                                <h4>Generative AI Data Analyst</h4>
+                                            </div>
+                                        </li>
+                                        <li>
+<a href="https://workforceinstitute.io/ui-ux-design" title="Online UI UX design course">
+                                            <img src="{{media url=&quot;wysiwyg/work-force-institute-3.jpg&quot;}}" alt="" />
+</a>
+                                            <div class="content">
+                                                <h4>UI/UX Design</h4>
+                                            </div>
+                                        </li>
+                                        <li>
+<a href="https://workforceinstitute.io/digital-marketing" title="Online Digital Marketing course">
+                                            <img src="{{media url=&quot;wysiwyg/work-force-institute-2.jpg&quot;}}" alt="" />
+</a>
+                                            <div class="content">
+                                                <h4>Digital Marketing</h4>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Looking to enhance your team's skills and career growth, contact our team today to explore
+                            how
+                            Workforce Institute can support your training, staffing, and professional development needs.
+                        </p>
+                        <div class="col-12 col-md-4 mt-4 mt-md-0">
+                            <div class="main_banner_form1">
+                                <div id="hubspotFormsContainer">
+                                    <script charset="utf-8" type="text/javascript"
+                                        src="//js.hsforms.net/forms/embed/v2.js"></script>
+                                    <div data-bind="mageInit: {
+                                        'Magento_Ui/js/modal/modal':{
+                                        'type': 'popup',
+                                        'trigger': '[data-trigger=syllabus-modal]',
+                                        'responsive': true,
+                                        'modalClass': 'lead-journey',
+                                        'buttons': []
+                                        }}">
+                                        <div class="content">
+
+<h3>Start Today!</h3>
+                                            <script>
+                                                hbspt.forms.create({
+                                                    region: "na1",
+                                                    portalId: "7305468",
+                                                    formId: "4177b4d5-8d2a-42c6-a297-a717d0f728f9",
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buttonsWrapper"> <a class="btn btn-qs-theme effect btn-sm leadFormModal" href="javascript:void(0)" data-trigger="syllabus-modal" data-form-title="Contact Us" style="margin-top: 0px !important;"><span>Contact Us</span></a> </div>
+                    </div>
+                    <div class="col-lg-6 mobile-hide">
+<img src="{{media url=&quot;wysiwyg/infortis/resized.png&quot;}}" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div
+        class="about-area personal-training inc-fixed-bg default-padding-bottom default-padding-top bg-color-custom z_index">
+        <!-- Fixed BG -->
+        <div class="fixed-bg three-people"
+            style="background-image: url('https://di3xp7dfi3cq.cloudfront.net/media/wysiwyg/marketing/home-page/individuals-bg.webp');"
+            data-bg-img="false"></div>
+        <!-- End Fixed BG -->
+        <div class="">
+            <div class="about-items">
+                <div class="row align-center">
+                    <div class="col-lg-6"><img src="{{media url=&quot;wysiwyg/work-force-institute-4.jpg&quot;}}"
+                            alt="" /> </div>
+                    <div class="col-lg-6 info dflex">
+                        <h2 class=""><span>Empower Your Future</span><br>
+                            with Transformative Learning</h2>
+                        <p class="highlighted">At Workforce Institute, we empower professionals to advance their careers
+                            in high-demand fields
+                            through hands-on, project-driven learning. Our online training programs offer affordable
+                            pathways to
+                            valuable careers, providing:</p>
+                        <!--Don't Remove-->
+
+                        <div class="choose-us-area">
+                            <div class="item-box">
+                                <div class="right-info">
+                                    <ul>
+                                        <li> <img
+                                                src="https://di3xp7dfi3cq.cloudfront.net/media/wysiwyg/marketing/home-page/individuals-thumb-1.webp"
+                                                alt="" loading="lazy">
+                                            <div class="content">
+                                                <h4>Hands-On Bootcamps & Certifications</h4>
+                                                <p>Our bootcamps and certification programs cater to all experience
+                                                    levels, helping you build the skills
+                                                    needed to excel, switch careers, and increase earning potential.</p>
+                                            </div>
+                                        </li>
+                                        <li> <img
+                                                src="https://di3xp7dfi3cq.cloudfront.net/media/wysiwyg/marketing/home-page/individuals-thumb-2.webp"
+                                                alt="" loading="lazy">
+                                            <div class="content">
+                                                <h4>Learning Pathways</h4>
+                                                <p>We offer tailored learning paths for a range of professions, ensuring
+                                                    you gain the expertise needed for
+                                                    your desired role.</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Plus, Workforce Institute provides comprehensive career support services to students after
+                            program
+                            completion. Contact our team today to discover the perfect program for your goals</p>
+                        <div class="buttonsWrapper"> <a class="btn btn-qs-theme effect btn-sm leadFormModal" href="javascript:void(0)" data-trigger="syllabus-modal" data-form-title="Contact Us" style="margin-top: 0px !important;"><span>Contact Us</span></a> </div>
+<p></p>
+<div class="home-courses-links">
+<a href="https://workforceinstitute.io/generative-ai-data-analyst" title="Online Data science course">Generative AI Data Analyst</a> | <a href="https://workforceinstitute.io/ui-ux-design" title="Online UI UX program">UI/UX Design Bootcamp</a> | <a href="https://workforceinstitute.io/digital-marketing" title="Digital marketing course online">Digital Marketing Bootcamp</a>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <section class="graduate-carousel our_graduates_are_saying">
+        <div class="container py-md-5">
+            <h2 class="text-center py-md-5 graduate-carousel_title section__title">
+                What Our Graduates Are Saying
+            </h2>
+        </div>
+    
+        <div class="container-fluid">
+            <div class="graduates_testimonials">
+                <div class="row avc owl-carousel">
+                <div class="graduates_reviews rounded-3">
+                        <div class="graduates_reviews_top_section">
+                            <div class="graduates_reviews_image">
+                                <img src='{{media url="wysiwyg/graduates-saying-image2.png"}}' alt="Graduates"
+                                    class="img-fluid" />
+                            </div>
+                            <div class="graduates_reviews_title">
+                                <h6>Syed Muhammad Hassanain</h6>
+                                <p>UI/UX Designer</p>
+                            </div>
+                            <div class="graduates_reviews_rating">
+                                <p>4.7</p>
+                                <img src='{{media url="wysiwyg/ant-design_star-filled.png"}}' alt="Graduates rating"
+                                    class="img-fluid" />
+                            </div>
+                        </div>
+                        <div class="graduates_reviews_description">
+                            <p>
+Thank you for the kind message. I appreciate the support and guidance your team provides. Your programs have helped me grow and stay motivated in my learning journey. I am grateful to be part of this community and I look forward to continuing to learn and improve my skills.
+Wishing you and your team a joyful Thanksgiving filled with peace and good moments.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="graduates_reviews rounded-3">
+                        <div class="graduates_reviews_top_section">
+                            <div class="graduates_reviews_image">
+                                <img src='{{media url="wysiwyg/graduates-saying-image2.png"}}' alt="Graduates"
+                                    class="img-fluid" />
+                            </div>
+                            <div class="graduates_reviews_title">
+                                <h6>Sharawn White</h6>
+                                <p>UI/UX Course</p>
+                            </div>
+                            <div class="graduates_reviews_rating">
+                                <p>4.5</p>
+                                <img src='{{media url="wysiwyg/ant-design_star-filled.png"}}' alt="Graduates rating"
+                                    class="img-fluid" />
+                            </div>
+                        </div>
+                        <div class="graduates_reviews_description">
+                            <p>
+                                The live sessions in the UI/UX program provides valuable insights
+                                and instruction. You have the opportunity to get direct feedback
+                                on your work so you can make improvements as you go along. Our
+                                instructor was upbeat, friendly and always willing to help.​
+                            </p>
+                        </div>
+                    </div>
+                    <div class="graduates_reviews rounded-3">
+                        <div class="graduates_reviews_top_section">
+                            <div class="graduates_reviews_image">
+                                <img src='{{media url="wysiwyg/graduates-saying-image3.png"}}' alt="Graduates saying"
+                                    class="img-fluid" />
+                            </div>
+                            <div class="graduates_reviews_title">
+                                <h6>Sasha Duarte</h6>
+                                <p>UI/UX Course</p>
+                            </div>
+                            <div class="graduates_reviews_rating">
+                                <p>4.5</p>
+                                <img src='{{media url="wysiwyg/ant-design_star-filled.png"}}' alt="Graduates rating"
+                                    class="img-fluid" />
+                            </div>
+                        </div>
+                        <div class="graduates_reviews_description">
+                            <p>
+                                The UI/UX program really stood out to me on day one. Very well
+                                organized and put together. I enjoyed the weekly zoom lectures and
+                                was able to get my questions answered promptly. The information
+                                was engaging and definitely has helped shaped me as a designer. I
+                                recommend this program!​
+                            </p>
+                        </div>
+                    </div>
+                    <div class="graduates_reviews rounded-3">
+                        <div class="graduates_reviews_top_section">
+                            <div class="graduates_reviews_image">
+                                <img src='{{media url="wysiwyg/graduates-saying-image1.png"}}' alt="graduates saying"
+                                    class="img-fluid" />
+                            </div>
+                            <div class="graduates_reviews_title">
+                                <h6>Evra Farsak</h6>
+                                <p>UI/UX Course</p>
+                            </div>
+                            <div class="graduates_reviews_rating">
+                                <p>4.5</p>
+                                <img src='{{media url="wysiwyg/ant-design_star-filled.png"}}' alt="graduates rating"
+                                    class="img-fluid" />
+                            </div>
+                        </div>
+                        <div class="graduates_reviews_description">
+                            <p>
+                                I have signed up for the 24-week immersive program for UX/UI
+                                design. The 24-weeks with the immersive program has given me new
+                                experiences and helped me develop career skills, my teachers and
+                                counselors made sure I was on track and picking up the skills I
+                                needed for my future career.
+                            </p>
+                        </div>
+                    </div>
+                 
+                    <div class="graduates_reviews rounded-3">
+                        <div class="graduates_reviews_top_section">
+                            <div class="graduates_reviews_image">
+                                <img src="{{media url=&quot;wysiwyg/john-image.png&quot;}}" alt="graduates saying"
+                                    class="img-fluid" />
+                            </div>
+                            <div class="graduates_reviews_title">
+                                <h6>John Solis​​</h6>
+                                <p>Digital Marketing Course</p>
+                            </div>
+                            <div class="graduates_reviews_rating">
+                                <p>4.5</p>
+                                <img src="{{media url=&quot;wysiwyg/ant-design_star-filled.png&quot;}}"
+                                    alt="graduates rating" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="graduates_reviews_description ">
+                            <p>
+                                Feeling thankful that I found this program at the right moment in my life. For a while I was
+                                contemplating changing careers but felt hesitant to do so because I lacked certain skills.
+                                This immersive program not only gave me the confidence to pursue a new career, but the job
+                                ready skills I will need day one.​
+                            </p>
+                        </div>
+                    </div>
+                   
+                    <div class="graduates_reviews rounded-3">
+                        <div class="graduates_reviews_top_section">
+                            <div class="graduates_reviews_image">
+                                <img src="{{media url=&quot;wysiwyg/caitlin-image.png&quot;}}" alt="graduates saying"
+                                    class="img-fluid" />
+                            </div>
+                            <div class="graduates_reviews_title">
+                                <h6>Caitlin DeJesus​​</h6>
+                                <p>UI/UX Course</p>
+                            </div>
+                            <div class="graduates_reviews_rating">
+                                <p>4.5</p>
+                                <img src="{{media url=&quot;wysiwyg/ant-design_star-filled.png&quot;}}"
+                                    alt="graduates rating" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="graduates_reviews_description ">
+                            <p>
+                                This UX/UI University Immersive program was honestly a great experience. I felt that I was
+                                able to expand my horizons as an artist and learn how to create applications. Everyone was
+                                extremely kind and I loved being able to work with peers who were in this journey with me,
+                                and receive feedback that made me a stronger designer.​
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="graduates_reviews rounded-3">
+                        <div class="graduates_reviews_top_section">
+                            <div class="graduates_reviews_image">
+                                <img src="{{media url=&quot;wysiwyg/melissa-image.png&quot;}}" alt="graduates saying"
+                                    class="img-fluid" />
+                            </div>
+                            <div class="graduates_reviews_title">
+                                <h6>Melissa Tyson​​</h6>
+                                <p>UI/UX Course</p>
+                            </div>
+                            <div class="graduates_reviews_rating">
+                                <p>4.5</p>
+                                <img src="{{media url=&quot;wysiwyg/ant-design_star-filled.png&quot;}}"
+                                    alt="graduates rating" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="graduates_reviews_description ">
+                            <p>
+                                Wow, what an experience. There was great communication throughout each part of my journey,
+                                and that was instrumental to my success. The program is taught by a professional working in
+                                the UX/UI field, so that means you’re getting a highly practical learning experience. And
+                                the support following the course? That exceeded my expectations. They are dedicated to
+                                making sure you represent yourself and your skill-set well via LinkedIn and your CV/resume.
+                                All in all, a solid program. ​
+                            </p>
+                        </div>
+                    </div>
+               
+                    <div class="graduates_reviews rounded-3">
+                        <div class="graduates_reviews_top_section">
+                            <div class="graduates_reviews_image">
+                                <img src="{{media url=&quot;wysiwyg/paula-image.png&quot;}}" alt="graduates saying"
+                                    class="img-fluid" />
+                            </div>
+                            <div class="graduates_reviews_title">
+                                <h6>Paula Cortes​​</h6>
+                                <p>UI/UX Course</p>
+                            </div>
+                            <div class="graduates_reviews_rating">
+                                <p>4.5</p>
+                                <img src="{{media url=&quot;wysiwyg/ant-design_star-filled.png&quot;}}"
+                                    alt="graduates rating" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="graduates_reviews_description ">
+                            <p>
+                                "I Joined Hofstra Ux/Ui program with very little knowledge but I was very interested in the
+                                topic. The curriculum was very well structured and a lot of learning materials. The mentor
+                                sessions were the most beneficial and productive part. My mentor had all the availability
+                                and dedication to answer all my questions.
+                                I am now in the process of finding a job in the field of UI in which a career coach is
+                                assisting me, now I feel much more confident in my abilities and I am excited to continue on
+                                this career path.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="graduates_reviews rounded-3">
+                        <div class="graduates_reviews_top_section">
+                            <div class="graduates_reviews_image">
+                                <img src="{{media url=&quot;wysiwyg/thomas-image.png&quot;}}" alt="graduates saying"
+                                    class="img-fluid" />
+                            </div>
+                            <div class="graduates_reviews_title">
+                                <h6>Thomas Ong​​​</h6>
+                                <p>UI/UX Course</p>
+                            </div>
+                            <div class="graduates_reviews_rating">
+                                <p>4.5</p>
+                                <img src="{{media url=&quot;wysiwyg/ant-design_star-filled.png&quot;}}"
+                                    alt="graduates rating" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="graduates_reviews_description ">
+                            <p>
+                                I have built the confidence, skill set and professional development necessary to seek out
+                                roles in the UX field
+                            </p>
+                        </div>
+                    </div>
+                
+                    <div class="graduates_reviews rounded-3">
+                        <div class="graduates_reviews_top_section">
+                            <div class="graduates_reviews_image">
+                                <img src="{{media url=&quot;wysiwyg/nolan-image.png&quot;}}" alt="graduates saying"
+                                    class="img-fluid" />
+                            </div>
+                            <div class="graduates_reviews_title">
+                                <h6>Nolan​</h6>
+                                <p>UI/UX Course</p>
+                            </div>
+                            <div class="graduates_reviews_rating">
+                                <p>4.5</p>
+                                <img src="{{media url=&quot;wysiwyg/ant-design_star-filled.png&quot;}}"
+                                    alt="graduates rating" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="graduates_reviews_description ">
+                            <p>
+                                The 6 month UX/UI certification program gave me the skill set, credibility, and confidence
+                                needed to be promoted from a Graphic Designer to a UI/Visual Designer at my current company.
+                                - Alexis Nelson</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="home_page_blogs section_space">
+    <div class="container">
+        {{widget type="Magefan\Blog\Block\Widget\Recent" title="Want to learn more?" number_of_posts="3" category_id="0"
+        tag_id="0" author_id="0"}}
+    </div>
+</div>
+
+
+
+
+
+
+<!-----New Footer 2025------>
+{{widget type="Magento\Cms\Block\Widget\Block" template="widget/static_block/default.phtml" block_id="1430"}}
+<!-----New Footer 2025------>
+
+
+  <style>
+.about-area.personal-training.inc-fixed-bg.default-padding-bottom.default-padding-top.bg-color-custom.z_index {
+    padding: 0;
+}
+        .banner-area {
+            /* top: -90px; */
+            height: auto;
+            min-height: 76vh;
+            max-height: 750px;
+            position: relative;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .banner-area .container {
+            position: relative;
+        }
+
+        .banner-area .content-wrap {
+            display: block;
+            width: 950px;
+            max-width: 90%;
+            /* height: 257px; */
+            margin: 0 auto;
+            z-index: 10;
+            top: 0;
+            position: relative;
+            -webkit-transition: all 1s;
+            -moz-transition: all 1s;
+            -ms-transition: all 1s;
+            -o-transition: all 1s;
+            transition: all 1s;
+        }
+
+        .banner-area h1 {
+            color: #fff;
+            font-weight: 700;
+            font-size: 40px;
+        }
+
+        .banner-area p {
+            color: #fff;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 34px;
+            max-width: 850px;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+
+        .banner-area .buttonsWrapper {
+            justify-content: center;
+            margin-top: 40px;
+            -webkit-transition: all 1s;
+            -moz-transition: all 1s;
+            -ms-transition: all 1s;
+            -o-transition: all 1s;
+            transition: all 1s;
+        }
+
+        .banner-area select {
+            width: 300px;
+            background: linear-gradient(0deg, rgba(26, 59, 89, 1) 0%, rgba(40, 90, 135, 1) 100%);
+            border: solid 2px #678ab1;
+            align-items: center;
+            justify-content: center;
+            width: 300px;
+            color: #fff;
+            height: 50px;
+        }
+
+        .select2-container {
+            box-sizing: border-box;
+            display: inline-block;
+            margin: 0;
+            position: relative;
+            vertical-align: middle;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #444;
+            line-height: 28px;
+        }
+
+        .banner-area .select2-selection__rendered {
+            color: #fff !important;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .select2-container .select2-selection--single .select2-selection__rendered {
+            display: block;
+            padding-left: 8px;
+            padding-right: 20px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+
+
+        .up-logos {
+            padding: 40px 0 40px 0;
+            background-color: #fff;
+        }
+
+        .up-logos h2 {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .up-logos h2 span {
+            color: #d46527;
+        }
+
+        .up-logos-listing {
+display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+        }
+
+        .up-logos-listing img {
+        width: 250px;
+    margin: 10px 15px;
+    height: auto;
+    object-fit: contain;
+    cursor: pointer;
+        }
+
+        .about-area.team-training {
+            overflow: hidden;
+     padding: 75px 0 0 0;
+            min-height: 550px;
+            z-index: 10;
+        }
+
+        .bg-color-custom {
+            background: #F3F6FD;
+        }
+
+        .about-area.team-training .fixed-bg {
+            max-width: 45%;
+            bottom: -120px;
+        }
+
+        .about-area.team-training h2 span {
+            color: #d46527;
+        }
+
+        .about-area .about-items .info {
+            padding-right: 35px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-area .about-items .info h2 {
+            font-size: 32px;
+            font-weight: 600;
+            font-family: 'Manrope', sans-serif;
+            padding-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            margin: 0 0 15px;
+            text-transform: none;
+            font-weight: 400;
+        }
+
+        .about-area.team-training .about-items .choose-us-area {
+            padding-top: 0;
+            margin-top: 10px;
+        }
+
+        .choose-us-area .item-box {
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-area.team-training .about-items .choose-us-area .item-box .right-info ul {
+            margin: 30px 0;
+            display: flex;
+        }
+
+        .choose-us-area .item-box .right-info ul {
+            padding-left: 0px;
+            margin-left: 15px;
+        }
+
+        .about-area.team-training .about-items .choose-us-area .item-box .right-info ul li {
+            margin: 0 auto !important;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            text-align: center;
+            width: 200px;
+        }
+
+        .choose-us-area .item-box .right-info ul li {
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-area.team-training .item-box .right-info ul li img {
+            width: 120px;
+            min-width: 120px;
+            height: 120px !important;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 20px auto;
+            border-radius: 100%;
+        }
+
+        .choose-us-area .item-box .right-info ul li h4 {
+            font-weight: 700;
+        }
+
+        .buttonsWrapper {
+            display: flex;
+            align-items: center;
+            margin-top:20px;
+        }
+
+        .about-area.team-training .btn-qs-theme {
+            width: 270px;
+        }
+
+
+
+        .about-area.personal-training {
+            overflow: hidden;
+            padding: 75px 0;
+            min-height: 550px;
+            z-index: 10;
+            background-color: #fff;
+        }
+
+        .about-area.personal-training .fixed-bg {
+            left: 0;
+            right: inherit;
+            top: 0;
+            background-size: cover;
+            background-position: center center;
+            max-width: 45%;
+        }
+
+        .about-area.personal-training .info {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+padding-left: 3rem;
+        }
+
+
+        .about-area.personal-training h2 span {
+            color: #d46527;
+        }
+
+        .about-area.personal-training .about-items .choose-us-area {
+            padding-top: 0;
+            margin-top: 10px;
+        }
+
+        .choose-us-area .item-box {
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-area.personal-training .about-items .choose-us-area .item-box .right-info ul {
+            margin:0 !important;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .about-area.personal-training .about-items .choose-us-area .item-box .right-info ul li {
+            margin: 0 0 10px 0 !important;
+            display: flex;
+            align-items: center;
+        }
+
+        .about-area.personal-training .item-box .right-info ul li img {
+            width: 120px;
+            height: 120px !important;
+            object-fit: cover;
+            display: block;
+            margin-right: 25px;
+            border-radius: 100%;
+        }
+
+        .banner-area select option {
+            color: #000;
+        }
+
+
+        header#header {
+            position: absolute;
+            z-index: 1000000;
+            margin: 0 auto;
+            right: 0;
+            left: 0;
+            color: #fff !important;
+        }
+
+        header#header .navbar-dark .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        li.nav-item.dropend a {
+            color: #000 !important;
+        }
+
+        li.nav-item.nav-item_leadership a {
+            color: #000 !important;
+        }
+
+        /* Fullscreen Banner Container */
+        section#hero_section .banner {
+            position: relative;
+            width: 100%;
+     
+    min-height: 85vh;
+            overflow: hidden;
+        }
+
+        /* YouTube Video as Background */
+        section#hero_section .video-background iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 56.25vw;
+            /* Maintain 16:9 aspect ratio */
+            min-height: 100vh;
+            min-width: 177.77vh;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            pointer-events: none;
+            /* Prevent interaction with video */
+        }
+
+        /* Light Black Overlay */
+        section#hero_section .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            /* Black with 50% opacity */
+            z-index: 2;
+        }
+
+        /* Banner Content */
+        section#hero_section .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            color: #fff;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        section#hero_section .content h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .navbar-dark .navbar-brand svg path {
+            color: #fff !important;
+            fill: white;
+        }
+div#modal-content-1 .content h3 {
+    text-align: center;
+    margin: 0 1rem 1rem 1rem;
+}
+
+.modal-popup .modal-header {
+    padding: 2rem 0rem;
+    border-bottom: none;
+    border: none;
+}
+
+div#modal-content-1 {
+    border: none;
+}
+ .btn-qs-theme {
+    background: #0e1133;
+    border-radius: 0;
+    padding: 15px 45px;
+    font-size: 18px;
+    color: #fff;
+    border: none;
+}
+.home-courses-links a {
+    color: #666;
+    margin-right: 15px;
+    margin-left: 15px;
+    display: flex;
+}
+
+.home-courses-links {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.our_graduates_are_saying {
+    background: #f3f6fd;
+    padding-bottom: 60px;
+}
+
+.graduates_testimonials .graduates_reviews {
+    border: 2px solid #d46527;
+    background: #0e1133;
+}
+.graduates_reviews_description p {
+    color: #fff;
+}
+.graduates_testimonials .graduates_reviews:hover {
+    background: #fff;
+    border: 2px solid #d46527;
+    color: #333;
+}
+
+.graduates_reviews.rounded-3:hover .graduates_reviews_description p {
+    color: #333;
+}
+.graduates_testimonials .owl-page.active span, .classroom_values .owl-page.active span {
+    background-color: #d46527;
+}
+.graduates_testimonials .owl-buttons i, .classroom_values .owl-buttons i {
+    color: #d46527;
+}
+.graduates_testimonials .owl-controls.clickable, .classroom_values .owl-controls.clickable {
+    padding-top: 0;
+    margin-top: 0;
+}
+.home_page_blogs a.post-read-more {
+    background: #0e1133;
+}
+.graduates_reviews_description p {overflow: hidden;display: -webkit-box;-webkit-line-clamp: 7;-webkit-box-orient: vertical;}
+
+.graduates_reviews_description p {
+    min-height: 12rem;
+}
+.our_graduates_are_saying .graduate-carousel_title {
+    color: #0e1133;
+}
+@media only screen and (max-width: 768px) {
+.mobile-hide{
+ display: none;
+}
+            .choose-us-area .item-box .right-info ul {
+                padding-left: 0px;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .about-area .about-items .info {
+                padding-bottom: 40px;
+            }
+
+            .buttonsWrapper {
+                justify-content: center;
+            }
+        }
+@media (max-width: 767.98px) {
+    div#navbarSupportedContent {
+        position: unset;
+        background: #333;
+    }
+}
+    </style>
+
+
+<script>
+    require(["jquery", "owlcarousel"], function ($) {
+        $(document).ready(function () {
+            $(".graduate-carousel .avc").owlCarousel({
+                autoplay: true,
+                autoplayTimeout: 5000, // Adjust autoplay timeout as needed
+                center: true,
+                items: 3,
+                margin: 30,
+                loop: true,
+                dots: true,
+                navigation: true,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        margin: 10, // Set your margin for smaller screens here
+                    },
+                    600: {
+                        items: 1,
+                        margin: 20, // Set your margin for medium screens here
+                    },
+                    1200: {
+                        items: 3,
+                        margin: 30, // Set your margin for larger screens here
+                    },
+                },
+                navigationText: [
+                    '<i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>',
+                    '<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>',
+                ],
+            });
+        });
+    });
+</script>

@@ -8,10 +8,10 @@ export const assets = {
   wfiLogo: '/logos/wfi-logo.png',
   
   // Hero Section
-  heroMain: '/images/hero-main.jpg',
+  heroMain: '/images/homevideo.mp4',
   userAvatar1: '/images/user-avatar-1.png',
   userAvatar2: '/images/user-avatar-2.png',
-  starsRating: '/icons/stars-rating.png',
+  starsRating: '/icons/Group 2.png',
   lineDecor: '/icons/line-decor.svg',
   arrowRight: '/icons/arrow-right.svg',
   
@@ -40,13 +40,28 @@ export const assets = {
   ellipseDecor4: '/images/ellipse-decor-4.png',
   
   // Partners Section
+  partnerLineDecor: '/icons/partner-line-decor.svg',
   partnerLogos: [
-    '/logos/partner-logo-1.png',
-    '/logos/partner-logo-2.png',
-    '/logos/partner-logo-3.png',
-    '/logos/partner-logo-4.png',
-    '/logos/partner-logo-5.png',
-    '/logos/partner-logo-6.png',
+    {
+      logo: '/logos/partner-logo-1.png',
+      link: '#', // Add your partner link here
+      alt: 'Partner 1',
+    },
+    {
+      logo: '/logos/partner-logo-2.png',
+      link: '#', // Add your partner link here
+      alt: 'Partner 2',
+    },
+    {
+      logo: '/logos/partner-logo-3.png',
+      link: '#', // Add your partner link here
+      alt: 'Partner 3',
+    },
+    {
+      logo: '/logos/partner-logo-4.png',
+      link: '#', // Add your partner link here
+      alt: 'Partner 4',
+    },
   ],
   
   // Blog Section
