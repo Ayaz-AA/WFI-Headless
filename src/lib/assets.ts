@@ -9,6 +9,7 @@ export const assets = {
   
   // Hero Section
   heroMain: '/images/homevideo.mp4',
+  mainbannerimage: '/images/mainbannerimage.png',
   userAvatar1: '/images/user-avatar-1.png',
   userAvatar2: '/images/user-avatar-2.png',
   starsRating: '/icons/Group 2.png',

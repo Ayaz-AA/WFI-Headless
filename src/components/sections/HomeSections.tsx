@@ -2,39 +2,23 @@
 
 import Image from 'next/image';
 import { assets } from '@/lib/assets';
-import { ArrowRight, ArrowLeft, ArrowRightNav, PlayButton, StarFilled, StarHalf, StarEmpty, QuoteIconLarge, ArrowContinue, CheckCircle } from '@/components/icons';
-import { useRef, useEffect } from 'react';
+import { ArrowRight, ArrowLeft, ArrowRightNav, StarFilled, StarHalf, StarEmpty, QuoteIconLarge, ArrowContinue, CheckCircle } from '@/components/icons';
+import { useEffect, useState } from 'react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from "@/components/ui/carousel";
+import AutoHeight from "embla-carousel-auto-height";
+import { Card, CardContent } from "@/components/ui/card";
 
 const HERO_CIRCULAR_TEXT = 'OUR GRADUATES TRUST US';
 
 // Hero Section
 function HeroSection() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const restartVideo = () => {
-      video.currentTime = 0;
-      video.play().catch((error) => {
-        console.error('Error playing video:', error);
-      });
-    };
-
-    // Restart video every 10 seconds
-    const interval = setInterval(restartVideo, 10000);
-
-    // Initial play
-    video.play().catch((error) => {
-      console.error('Error playing video:', error);
-    });
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
   return (
     <section className="hero-section">
       <div className="hero-container">
@@ -61,15 +45,12 @@ function HeroSection() {
             </div>
           </div>
           <div className="hero-image-frame">
-            <video
-              ref={videoRef}
-              src={assets.heroMain}
-              width={500}
+            <Image
+              src={assets.mainbannerimage}
+              alt="Main banner"
+              width={700}
+              height={500}
               style={{ height: 'auto' }}
-              loop
-              muted
-              playsInline
-              autoPlay
             />
           </div>
           <div className="hero-image-column">
@@ -114,7 +95,7 @@ function PartnersSection() {
               Top university partners
             </h2>
             <p className="partners-description">
-              It's a crowded market, but we know the way. Cut through the fear with a companion by your side. Get access to expert knowledge that others don't have.
+              It&apos;s a crowded market, but we know the way. Cut through the fear with a companion by your side. Get access to expert knowledge that others don&apos;t have.
             </p>
           </div>
 
@@ -312,13 +293,137 @@ function ProgramsSection() {
   );
 }
 
+// Testimonials data
+const TESTIMONIALS_DATA = [
+  {
+    id: 1,
+    content: 'The UI/UX Program is a fantastic resource for anyone looking to enhance their design skills. It offers a comprehensive curriculum',
+    rating: 4.9,
+    avatar: assets.testimonialAvatar,
+  },
+  {
+    id: 2,
+    content: 'The UI/UX program really stood out to me on day one. Very wellorganized and put together. I enjoyed the weekly zoom lectures and was able to get my questions answered promptly.',
+    rating: 4.4,
+    avatar: assets.testimonialAvatar,
+  },
+  {
+    id: 3,
+    content: 'I have signed up for the 24-week immersive program for UX/UI design. The 24-weeks with the immersive program has given me new experiences and helped me develop career skills,',
+    rating: 4.4,
+    avatar: assets.testimonialAvatar,
+  },
+  {
+    id: 4,
+    content: 'Feeling thankful that I found this program at the right moment in my life. For a while I was contemplating changing careers but felt hesitant to do so because I lacked certain skills.',
+    rating: 4.4,
+    avatar: assets.testimonialAvatar,
+  },
+];
+
+// Testimonials Carousel Component
+function TestimonialsCarousel() {
+  const testimonials = TESTIMONIALS_DATA;
+  const [api, setApi] = useState<CarouselApi>();
+  const [, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCurrent(api.selectedScrollSnap());
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
+
+  useEffect(() => {
+    if (!api) return;
+
+    // Auto-advance carousel every 3 seconds
+    const interval = setInterval(() => {
+      api.scrollNext();
+    }, 3000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [api]);
+
+  const renderStars = (rating: number) => {
+    const stars = [];
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(<StarFilled key={i} className="testimonials-star" />);
+    }
+    if (hasHalfStar) {
+      stars.push(<StarHalf key="half" className="testimonials-star" />);
+    }
+    while (stars.length < 5) {
+      stars.push(<StarEmpty key={`empty-${stars.length}`} className="testimonials-star" />);
+    }
+    return stars;
+  };
+
+  return (
+    <div className="testimonials-carousel-wrapper">
+      <Carousel
+        orientation="vertical"
+        setApi={setApi}
+        opts={{
+          align: "start",
+          loop: true,
+        }}
+        plugins={[AutoHeight()]}
+        className="w-full"
+      >
+        <CarouselContent className="-mt-1">
+          {testimonials.map((testimonial) => (
+            <CarouselItem
+              key={testimonial.id}
+              className="testimonials-carousel-item"
+            >
+              <div className="p-1">
+                <Card>
+                  <CardContent className="testimonials-user">
+                    <div className="testimonials-user-info">
+                      <Image
+                        src={testimonial.avatar}
+                        alt="Testimonial"
+                        width={48}
+                        height={48}
+                        className="testimonials-user-avatar"
+                      />
+                      <div>
+                        <div className="testimonials-rating">
+                          <div className="testimonials-stars">
+                            {renderStars(testimonial.rating)}
+                          </div>
+                        </div>
+                        <p className="testimonials-user-role">
+                          {testimonial.content}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+    </div>
+  );
+}
+
 // Featured Program Section
 function FeaturedProgramSection() {
-  const CIRCULAR_TEXT = 'OUR GRADUATES TRUST US';
-  
   return (
     <section className="featured-program-section">
-      <div className="featured-program-decor" aria-hidden="true" />
       <div className="featured-program-container">
         <div className="programs-featured">
           {/* Top Section: Title, Description, and Button */}
@@ -342,97 +447,17 @@ function FeaturedProgramSection() {
               </button>
             </div>
           </div>
-
-          {/* Central Section: Circular Text and Image */}
-          <div className="programs-featured-center">
-            <div className="programs-featured-circular-wrapper">
-              {/* Circular Text SVG */}
-              <svg className="programs-featured-circular-text" viewBox="0 0 352 352" aria-hidden="true">
-                <defs>
-                  <path id="programs-circle-path" d="M176 20a156 156 0 1 1 0 312a156 156 0 1 1 0-312" />
-                </defs>
-                <text>
-                  <textPath href="#programs-circle-path" startOffset="0%">
-                    {`${CIRCULAR_TEXT} ${CIRCULAR_TEXT}`}
-                  </textPath>
-                </text>
-              </svg>
-              
-              {/* Central Image with Ellipse Background */}
-              <div className="programs-featured-image-wrapper">
-                <div className="programs-featured-ellipse-bg">
-                  <img
-                    src="https://www.figma.com/api/mcp/asset/cb87b3af-47f6-40d2-ac4a-f6ad6114cc46"
-                    alt=""
-                    width={596}
-                    height={622}
-                    className="programs-featured-ellipse"
-                  />
-                </div>
-                <div className="programs-featured-main-image">
-                  <img
-                    src="https://www.figma.com/api/mcp/asset/bfa51766-45b3-4197-ad5b-b5607b16e299"
-                    alt="Program participant"
-                    width={405}
-                    height={287}
-                    className="programs-featured-image-img"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Decorative Lines */}
-            <div className="programs-featured-line programs-featured-line-1">
-              <img
-                src="https://www.figma.com/api/mcp/asset/1b81b1da-99d4-46f7-83e3-d9c95afd0ae7"
-                alt=""
-                width={147}
-                height={26}
-                className="programs-featured-line-img"
-              />
-            </div>
-            <div className="programs-featured-line programs-featured-line-2">
-              <img
-                src="https://www.figma.com/api/mcp/asset/178e314e-d1b1-4055-a374-813ec2ecb5e0"
-                alt=""
-                width={116}
-                height={38}
-                className="programs-featured-line-img"
-              />
-            </div>
-
-            {/* Testimonial Section */}
-            <div className="programs-featured-testimonial">
-              <div className="programs-featured-quote-icon-wrapper">
-                <img
-                  src="https://www.figma.com/api/mcp/asset/3fe3f124-eaa4-4d5e-a798-ce47ae8627aa"
-                  alt=""
-                  width={108}
-                  height={33}
-                  className="programs-featured-quote-icon"
-                />
-              </div>
-              <p className="programs-featured-quote">
-                The UI/UX Program is a fantastic resource for anyone looking to enhance their design skills. It offers a comprehensive curriculum
-              </p>
-            </div>
-
-            {/* Decorative Ellipse */}
-            <div className="programs-featured-ellipse-decor">
-              <img
-                src="https://www.figma.com/api/mcp/asset/2cc55252-c673-43be-ac3e-fd97afc552ed"
-                alt=""
-                width={68}
-                height={68}
-                className="programs-featured-ellipse-small"
-              />
-            </div>
+          <div className="programs-featured-mid-img">
+            <Image
+              src="/images/middle bg.png"
+              alt=""
+              width={650}
+              height={650}
+              className="programs-featured-mid-img-img"
+              style={{ height: 'auto' }}
+            />
           </div>
-
-          {/* Bottom Section: Our Programs Title */}
-          <h2 className="programs-featured-bottom-title">
-            Our Programs
-          </h2>
+          <TestimonialsCarousel />
         </div>
       </div>
     </section>
@@ -475,7 +500,7 @@ function AboutSection() {
               The all-in-one career companion
             </h3>
             <p className="about-subtext">
-              It's a crowded market, but we know the way. Cut through the fear with a companion by your side. Get access to expert knowledge that others don't have.
+              It&apos;s a crowded market, but we know the way. Cut through the fear with a companion by your side. Get access to expert knowledge that others don&apos;t have.
             </p>
             <button className="about-button">
               Explore Customer Stories
@@ -523,39 +548,10 @@ function TestimonialsSection() {
 
             {/* Testimonial Text */}
             <p className="testimonials-text">
-              "I appreciated how they matched my personality type with the right program. The bootcamp was challenging but exactly what I needed."
+              &quot;I appreciated how they matched my personality type with the right program. The bootcamp was challenging but exactly what I needed.&quot;
             </p>
 
-            {/* User Info */}
-            <div className="testimonials-user">
-              <div className="testimonials-user-info">
-                <Image
-                  src={assets.testimonialAvatar}
-                  alt="Emily Rodriguez"
-                  width={48}
-                  height={48}
-                  className="testimonials-user-avatar"
-                />
-                <div>
-                  <p className="testimonials-user-name">
-                    Emily Rodriguez
-                  </p>
-                  <p className="testimonials-user-role">
-                    Digital Marketing Specialist
-                  </p>
-                </div>
-              </div>
-              <div className="testimonials-rating">
-                <div className="testimonials-stars">
-                  <StarFilled className="testimonials-star" />
-                  <StarFilled className="testimonials-star" />
-                  <StarFilled className="testimonials-star" />
-                  <StarHalf className="testimonials-star" />
-                  <StarEmpty className="testimonials-star" />
-                </div>
-                <span className="testimonials-rating-text">4.4/ 5</span>
-              </div>
-            </div>
+           
 
             {/* Progress Bar */}
             <div className="testimonials-progress" />

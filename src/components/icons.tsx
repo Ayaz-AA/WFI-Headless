@@ -28,21 +28,21 @@ export const ArrowContinue = ({ className = "w-8 h-8" }: { className?: string })
 );
 
 export const StarFilled = ({ className = "w-4 h-4" }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M8 0L10.163 5.527L16 6.112L11.82 9.944L13.056 16L8 12.927L2.944 16L4.18 9.944L0 6.112L5.837 5.527L8 0Z" fill="currentColor"/>
+  <svg className={className} viewBox="0 0 16 16" fill="#F8770C" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 0L10.163 5.527L16 6.112L11.82 9.944L13.056 16L8 12.927L2.944 16L4.18 9.944L0 6.112L5.837 5.527L8 0Z" fill="#F8770C"/>
   </svg>
 );
 
 export const StarHalf = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M8 0L10.163 5.527L16 6.112L11.82 9.944L13.056 16L8 12.927V0Z" fill="currentColor"/>
-    <path d="M8 0L5.837 5.527L0 6.112L4.18 9.944L2.944 16L8 12.927V0Z" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+    <path d="M8 0L10.163 5.527L16 6.112L11.82 9.944L13.056 16L8 12.927V0Z" fill="#F8770C"/>
+    <path d="M8 0L5.837 5.527L0 6.112L4.18 9.944L2.944 16L8 12.927V0Z" fill="none" stroke="#F8770C" strokeWidth="0.5"/>
   </svg>
 );
 
 export const StarEmpty = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M8 0L10.163 5.527L16 6.112L11.82 9.944L13.056 16L8 12.927L2.944 16L4.18 9.944L0 6.112L5.837 5.527L8 0Z" stroke="currentColor" strokeWidth="0.5" fill="none"/>
+    <path d="M8 0L10.163 5.527L16 6.112L11.82 9.944L13.056 16L8 12.927L2.944 16L4.18 9.944L0 6.112L5.837 5.527L8 0Z" stroke="#F8770C" strokeWidth="0.5" fill="none"/>
   </svg>
 );
 
