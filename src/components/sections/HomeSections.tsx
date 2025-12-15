@@ -52,6 +52,7 @@ function HeroSection() {
               height={500}
               style={{ height: 'auto' }}
             />
+            <HeroEarCircularText />
           </div>
           <div className="hero-image-column">
            
@@ -74,6 +75,28 @@ function HeroCircularText() {
       <text>
         <textPath href="#hero-circle-path" startOffset="0%">
           {`${HERO_CIRCULAR_TEXT} ${HERO_CIRCULAR_TEXT}`}
+        </textPath>
+      </text>
+    </svg>
+  );
+}
+
+function HeroEarCircularText() {
+  return (
+    <svg
+      className="hero-ear-circular-text"
+      viewBox="0 0 120 120"
+      aria-hidden="true"
+    >
+      <defs>
+        <path
+          id="hero-ear-circle-path"
+          d="M60 10a50 50 0 1 1 0 100a50 50 0 1 1 0-100"
+        />
+      </defs>
+      <text>
+        <textPath href="#hero-ear-circle-path" startOffset="0%">
+          0 0 0 0 0 0 0 0 0 0 0 0 0 0 
         </textPath>
       </text>
     </svg>

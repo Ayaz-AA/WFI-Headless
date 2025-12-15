@@ -117,6 +117,38 @@
   height: auto;
 }
 
+.hero-ear-circular-text {
+  position: absolute;
+  /* Adjust these to sit over the robot ear area */
+  top: 17.6%;
+  right: 20.5%;
+  width: 14%;
+  height: 7%;
+  color: #236f9e;
+  animation: hero-ear-rotate 14s linear infinite;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.hero-ear-circular-text text {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  fill: rgb(212 101 39);
+  font-size: 16px;
+    font-weight: bold;
+}
+
+@keyframes hero-ear-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Robot eye neon blink overlay */
 .hero-image-frame::after {
   content: "";
