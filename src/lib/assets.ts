@@ -13,6 +13,7 @@ export const assets = {
   userAvatar1: '/images/user-avatar-1.png',
   userAvatar2: '/images/user-avatar-2.png',
   starsRating: '/icons/Group 2.png',
+  starPng: '/images/image.png',
   lineDecor: '/icons/line-decor.svg',
   arrowRight: '/icons/arrow-right.svg',
   
@@ -69,5 +70,11 @@ export const assets = {
   blogThumb: '/images/blog-thumb-1.jpg',
   blogFeatured: '/images/blog-featured.jpg',
   arrowContinue: '/icons/arrow-continue.svg',
+  
+  // Integrations Section
+  futuristicHandDesign: '/images/futuristic-hand-design-1.png',
+  
+  // AI Platform Section
+  aiPlatformIllustration: '/images/undraw_chat-with-ai_ir62 1.png',
 } as const;
 

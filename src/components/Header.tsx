@@ -24,8 +24,8 @@ export default function Header() {
           <a href="#about" className="text-[#101828] text-base font-normal hover:text-[#d46527] transition-colors">
             About Us
           </a>
-          <a href="#testimonials" className="text-[#101828] text-base font-normal hover:text-[#d46527] transition-colors">
-            Testimonials
+          <a href="#integrations" className="text-[#101828] text-base font-normal hover:text-[#d46527] transition-colors">
+            Integrations
           </a>
           <a href="#events" className="text-[#101828] text-base font-normal hover:text-[#d46527] transition-colors">
             Webinar/Events

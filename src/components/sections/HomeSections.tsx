@@ -1,19 +1,12 @@
 'use client';
 
 import Image from 'next/image';
+import { useRef, useState, useEffect } from 'react';
+import Slider from 'react-slick';
 import { assets } from '@/lib/assets';
-import { ArrowRight, ArrowLeft, ArrowRightNav, StarFilled, StarHalf, StarEmpty, QuoteIconLarge, ArrowContinue, CheckCircle } from '@/components/icons';
-import { useEffect, useState } from 'react';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  type CarouselApi,
-} from "@/components/ui/carousel";
-import AutoHeight from "embla-carousel-auto-height";
-import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight, ArrowLeft, ArrowRightNav, QuoteIconLarge, ArrowContinue, CheckCircle } from '@/components/icons';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const HERO_CIRCULAR_TEXT = 'OUR GRADUATES TRUST US';
 
@@ -218,6 +211,8 @@ function StatsSection() {
 
 // Programs Section
 function ProgramsSection() {
+  const sliderRef = useRef<Slider>(null);
+
   const programs = [
     {
       title: 'AI Generative',
@@ -238,6 +233,12 @@ function ProgramsSection() {
       link: '#',
     },
     {
+      title: 'Digital Marketing 2',
+      description: 'Join CMOs from Jasper and Webflow as they discuss.',
+      image: assets.programDigitalMarketing1,
+      link: '#',
+    },
+    {
       title: 'Digital Marketing',
       description: 'Join CMOs from Jasper and Webflow as they discuss.',
       image: assets.programDigitalMarketing2,
@@ -245,69 +246,165 @@ function ProgramsSection() {
     },
   ];
 
+  const markEdgeSlides = () => {
+    // Remove edge classes from all slides
+    const carousel = document.querySelector('.programs-carousel');
+    if (carousel) {
+      const slides = carousel.querySelectorAll('.slick-slide');
+      slides.forEach((slide) => {
+        slide.classList.remove('slick-edge');
+      });
+      
+      // Find center slide and mark adjacent slides as edges
+      const centerSlide = carousel.querySelector('.slick-slide.slick-center');
+      if (centerSlide) {
+        const prevSlide = centerSlide.previousElementSibling as HTMLElement;
+        const nextSlide = centerSlide.nextElementSibling as HTMLElement;
+        
+        if (prevSlide && prevSlide.classList.contains('slick-slide')) {
+          prevSlide.classList.add('slick-edge');
+        }
+        if (nextSlide && nextSlide.classList.contains('slick-slide')) {
+          nextSlide.classList.add('slick-edge');
+        }
+      }
+    }
+  };
+
+  const handleAfterChange = (current: number) => {
+    markEdgeSlides();
+  };
+
+  const sliderSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    arrows: false,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: false,
+    centerMode: true,
+    centerPadding: '0px',
+    afterChange: handleAfterChange,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2.5,
+          slidesToScroll: 1,
+          infinite: true,
+          centerMode: true,
+          centerPadding: '0px',
+          afterChange: handleAfterChange,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1.5,
+          slidesToScroll: 1,
+          infinite: true,
+          centerMode: true,
+          centerPadding: '0px',
+          afterChange: handleAfterChange,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          centerMode: false,
+        },
+      },
+    ],
+  };
+
+  const goToPrevious = () => {
+    sliderRef.current?.slickPrev();
+  };
+
+  const goToNext = () => {
+    sliderRef.current?.slickNext();
+  };
+
+  useEffect(() => {
+    // Mark edge slides after slider initializes
+    const timer = setTimeout(() => {
+      markEdgeSlides();
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section id="programs" className="programs-section">
       <div className="programs-container">
         {/* Section Header */}
         <div className="programs-header">
           <h2 className="programs-title">
-            <span className="programs-title-span">Training Solutions</span>
-            <br />
-            For Every Team
+            <span className="programs-title-span">Our Programs</span>
           </h2>
-          <div className="programs-header-content">
-            <p className="programs-description">
-              All the features you need to take a secure, controlled & impactful approach to AI.
-            </p>
-            <button className="programs-button">
-              Explore More Here
-            </button>
-          </div>
         </div>
 
         {/* Programs List */}
-        <div className="programs-list">
-          <div className="programs-scroll">
+        <div className="programs-list-wrapper">
+          <div className="programs-list">
+            <Slider
+              ref={sliderRef}
+              {...sliderSettings}
+              className="programs-carousel"
+            >
             {programs.map((program, index) => (
-              <div
-                key={index}
-                className="program-card"
-              >
-                <div>
-                  <div className="program-image-wrapper">
-                    <Image
-                      src={program.image}
-                      alt={program.title}
-                      fill
-                      className="object-cover"
-                    />
+              <div key={index} className="program-slide">
+                <div className="program-card">
+                  <div>
+                    <div className="program-image-wrapper">
+                      <Image
+                        src={program.image}
+                        alt={program.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <strong className="program-title">
+                      {program.title}
+                    </strong>
+                    <p className="program-description">
+                      {program.description}
+                    </p>
                   </div>
-                  <h3 className="program-title">
-                    {program.title}
-                  </h3>
-                  <p className="program-description">
-                    {program.description}
-                  </p>
+                  <a
+                    href={program.link}
+                    className="program-link"
+                  >
+                    Learn More
+                    <ArrowRight className="program-link-icon" />
+                  </a>
                 </div>
-                <a
-                  href={program.link}
-                  className="program-link"
-                >
-                  Learn More
-                  <ArrowRight className="program-link-icon" />
-                </a>
               </div>
             ))}
-          </div>
+            </Slider>
 
-          {/* Navigation Arrows */}
-          <div className="programs-nav">
-            <button className="programs-nav-button">
-              <ArrowLeft className="programs-nav-icon" />
-            </button>
-            <button className="programs-nav-button">
-              <ArrowRightNav className="programs-nav-icon" />
-            </button>
+            {/* Navigation Arrows */}
+            <div className="programs-nav">
+              <button 
+                className="programs-nav-button"
+                onClick={goToPrevious}
+                aria-label="Previous slide"
+              >
+                <ArrowLeft className="programs-nav-icon" />
+              </button>
+              <button 
+                className="programs-nav-button"
+                onClick={goToNext}
+                aria-label="Next slide"
+              >
+                <ArrowRightNav className="programs-nav-icon" />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -316,135 +413,25 @@ function ProgramsSection() {
   );
 }
 
-// Testimonials data
-const TESTIMONIALS_DATA = [
-  {
-    id: 1,
-    content: 'The UI/UX Program is a fantastic resource for anyone looking to enhance their design skills. It offers a comprehensive curriculum',
-    rating: 4.9,
-    avatar: assets.testimonialAvatar,
-  },
-  {
-    id: 2,
-    content: 'The UI/UX program really stood out to me on day one. Very wellorganized and put together. I enjoyed the weekly zoom lectures and was able to get my questions answered promptly.',
-    rating: 4.4,
-    avatar: assets.testimonialAvatar,
-  },
-  {
-    id: 3,
-    content: 'I have signed up for the 24-week immersive program for UX/UI design. The 24-weeks with the immersive program has given me new experiences and helped me develop career skills,',
-    rating: 4.4,
-    avatar: assets.testimonialAvatar,
-  },
-  {
-    id: 4,
-    content: 'Feeling thankful that I found this program at the right moment in my life. For a while I was contemplating changing careers but felt hesitant to do so because I lacked certain skills.',
-    rating: 4.4,
-    avatar: assets.testimonialAvatar,
-  },
-];
-
-// Testimonials Carousel Component
-function TestimonialsCarousel() {
-  const testimonials = TESTIMONIALS_DATA;
-  const [api, setApi] = useState<CarouselApi>();
-  const [, setCurrent] = useState(0);
-
-  useEffect(() => {
-    if (!api) {
-      return;
-    }
-
-    setCurrent(api.selectedScrollSnap());
-
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap());
-    });
-  }, [api]);
-
-  useEffect(() => {
-    if (!api) return;
-
-    // Auto-advance carousel every 3 seconds
-    const interval = setInterval(() => {
-      api.scrollNext();
-    }, 3000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [api]);
-
-  const renderStars = (rating: number) => {
-    const stars = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 >= 0.5;
-
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(<StarFilled key={i} className="testimonials-star" />);
-    }
-    if (hasHalfStar) {
-      stars.push(<StarHalf key="half" className="testimonials-star" />);
-    }
-    while (stars.length < 5) {
-      stars.push(<StarEmpty key={`empty-${stars.length}`} className="testimonials-star" />);
-    }
-    return stars;
-  };
-
-  return (
-    <div className="testimonials-carousel-wrapper">
-      <Carousel
-        orientation="vertical"
-        setApi={setApi}
-        opts={{
-          align: "start",
-          loop: true,
-        }}
-        plugins={[AutoHeight()]}
-        className="w-full"
-      >
-        <CarouselContent className="-mt-1">
-          {testimonials.map((testimonial) => (
-            <CarouselItem
-              key={testimonial.id}
-              className="testimonials-carousel-item"
-            >
-              <div className="p-1">
-                <Card>
-                  <CardContent className="testimonials-user">
-                    <div className="testimonials-user-info">
-                      <Image
-                        src={testimonial.avatar}
-                        alt="Testimonial"
-                        width={48}
-                        height={48}
-                        className="testimonials-user-avatar"
-                      />
-                      <div>
-                        <div className="testimonials-rating">
-                          <div className="testimonials-stars">
-                            {renderStars(testimonial.rating)}
-                          </div>
-                        </div>
-                        <p className="testimonials-user-role">
-                          {testimonial.content}
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
-    </div>
-  );
-}
-
 // Featured Program Section
 function FeaturedProgramSection() {
+  const testimonials = [
+    {
+      id: 1,
+      name: 'UI/UX Program Graduate',
+      program: 'The UI/UX Program',
+      text: 'The UI/UX Program is a fantastic resource for anyone looking to enhance their design skills. It offers a comprehensive curriculum and practical projects.',
+      avatar: assets.userAvatar1,
+    },
+    {
+      id: 2,
+      name: 'AI Generative Graduate',
+      program: 'The AI Generative Program',
+      text: 'The AI Generative Program helped me understand how to apply AI in real-world scenarios and build impactful solutions for my team.',
+      avatar: assets.userAvatar2,
+    },
+  ];
+
   return (
     <section className="featured-program-section">
       <div className="featured-program-container">
@@ -480,7 +467,60 @@ function FeaturedProgramSection() {
               style={{ height: 'auto' }}
             />
           </div>
-          <TestimonialsCarousel />
+        </div>
+      </div>
+      <div className="vertical-testimonial-carousel">
+        <div className="vertical-testimonial-window" aria-label="Student testimonials">
+          <Slider
+            className="vertical-testimonial-track"
+            vertical={true}
+            verticalSwiping={true}
+            slidesToShow={1}
+            slidesToScroll={1}
+            autoplay={true}
+            autoplaySpeed={2000}
+            infinite={true}
+            speed={500}
+            arrows={false}
+            dots={false}
+            pauseOnHover={false}
+          >
+            {testimonials.map((testimonial, index) => (
+              <article
+                key={`${testimonial.id}-${index}`}
+                className="vertical-testimonial-card"
+              >
+                <div className="vertical-testimonial-avatar">
+                  <Image
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    width={48}
+                    height={48}
+                  />
+                </div>
+
+                <div className="vertical-testimonial-body">
+                  <div className="vertical-testimonial-stars">
+                    {Array.from({ length: 5 }).map((_, starIndex) => (
+                      <Image
+                        key={starIndex}
+                        src={assets.starPng}
+                        alt="Star"
+                        width={16}
+                        height={16}
+                      />
+                    ))}
+                  </div>
+                  <p className="vertical-testimonial-text">
+                    <span className="vertical-testimonial-program">
+                      {testimonial.program}
+                    </span>{' '}
+                    {testimonial.text}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </Slider>
         </div>
       </div>
     </section>
@@ -489,43 +529,333 @@ function FeaturedProgramSection() {
 
 // About Section
 function AboutSection() {
+  const [activeTab, setActiveTab] = useState<'ui-ux' | 'ai-generative' | 'ai-software' | 'digital-marketing'>('ui-ux');
+  const testimonialSliderRef = useRef<Slider>(null);
+  const [progressKey, setProgressKey] = useState(0);
+  const autoplaySpeed = 3000; // 3 seconds
+
+  const testimonials = {
+    'ui-ux': [
+      {
+        text: 'Lorem ipsum dolor sit amet, consecteturadipiscing elit.Quis nostrud exercitation ullamco laboris nisi ut aliquip.Ex ea commodo consequat, duis aute irure dolor.',
+        name: 'Emily Rodriguez',
+        program: 'UI/UX Design',
+        rating: 4.4,
+        avatar: assets.userAvatar1,
+      },
+      {
+        text: 'The UI/UX Design program completely transformed my career. The comprehensive curriculum and hands-on projects gave me the confidence to land my dream job at a top design agency.',
+        name: 'Alex Thompson',
+        program: 'UI/UX Design',
+        rating: 4.6,
+        avatar: assets.userAvatar2,
+      },
+      {
+        text: 'I was amazed by the quality of instruction and the practical approach. The portfolio I built during the program helped me stand out in interviews and secure multiple job offers.',
+        name: 'Maria Garcia',
+        program: 'UI/UX Design',
+        rating: 4.5,
+        avatar: assets.userAvatar1,
+      },
+    ],
+    'ai-generative': [
+      {
+        text: 'The AI Generative Program transformed my understanding of creative AI applications. The hands-on projects and expert guidance helped me build real-world solutions that I use daily in my work.',
+        name: 'Sarah Chen',
+        program: 'AI Generative',
+        rating: 4.8,
+        avatar: assets.userAvatar2,
+      },
+      {
+        text: 'This program exceeded all my expectations. The instructors were industry experts who provided invaluable insights into the latest AI technologies and creative applications.',
+        name: 'David Kim',
+        program: 'AI Generative',
+        rating: 4.7,
+        avatar: assets.userAvatar1,
+      },
+      {
+        text: 'The practical projects and real-world case studies made learning engaging and applicable. I now use AI tools confidently in my creative workflow.',
+        name: 'Lisa Wang',
+        program: 'AI Generative',
+        rating: 4.9,
+        avatar: assets.userAvatar2,
+      },
+    ],
+    'ai-software': [
+      {
+        text: 'As a software engineer, this program gave me the tools to integrate AI into my development workflow. The practical approach and real-world examples made all the difference.',
+        name: 'Michael Johnson',
+        program: 'AI for Software Engineers',
+        rating: 4.6,
+        avatar: assets.userAvatar1,
+      },
+      {
+        text: 'The AI for Software Engineers program was exactly what I needed to stay competitive. I learned to build AI-powered features that significantly improved our product.',
+        name: 'James Wilson',
+        program: 'AI for Software Engineers',
+        rating: 4.8,
+        avatar: assets.userAvatar2,
+      },
+      {
+        text: 'The code examples and hands-on labs were incredibly valuable. I implemented several AI features in our production system based on what I learned.',
+        name: 'Robert Brown',
+        program: 'AI for Software Engineers',
+        rating: 4.7,
+        avatar: assets.userAvatar1,
+      },
+    ],
+    'digital-marketing': [
+      {
+        text: 'The Digital Marketing program exceeded my expectations. I learned cutting-edge strategies and tools that have directly improved my campaign performance and ROI.',
+        name: 'Jessica Martinez',
+        program: 'Digital Marketing',
+        rating: 4.7,
+        avatar: assets.userAvatar2,
+      },
+      {
+        text: 'This program helped me master modern digital marketing techniques. My campaigns now perform significantly better, and I\'ve been promoted to lead our marketing team.',
+        name: 'Amanda Taylor',
+        program: 'Digital Marketing',
+        rating: 4.6,
+        avatar: assets.userAvatar1,
+      },
+      {
+        text: 'The comprehensive curriculum covered everything from SEO to social media marketing. The practical assignments gave me real experience I could apply immediately.',
+        name: 'Jennifer Lee',
+        program: 'Digital Marketing',
+        rating: 4.8,
+        avatar: assets.userAvatar2,
+      },
+    ],
+  };
+
+  const currentTestimonials = testimonials[activeTab];
+
+  const tabs: Array<'ui-ux' | 'ai-generative' | 'ai-software' | 'digital-marketing'> = ['ui-ux', 'ai-generative', 'ai-software', 'digital-marketing'];
+
+  const goToPrevious = () => {
+    testimonialSliderRef.current?.slickPrev();
+  };
+
+  const goToNext = () => {
+    testimonialSliderRef.current?.slickNext();
+  };
+
+  // Reset slider when tab changes
+  useEffect(() => {
+    if (testimonialSliderRef.current) {
+      testimonialSliderRef.current.slickGoTo(0);
+    }
+    setProgressKey(prev => prev + 1); // Reset progress animation when tab changes
+  }, [activeTab]);
+
+  // Reset progress animation when slider changes
+  const handleAfterChange = () => {
+    setProgressKey(prev => prev + 1); // Restart animation
+  };
+
+  const renderStars = (rating: number) => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+    return (
+      <>
+        {Array.from({ length: fullStars }).map((_, i) => (
+          <Image key={`full-${i}`} src={assets.starPng} alt="Star" width={16} height={16} />
+        ))}
+        {hasHalfStar && (
+          <Image src={assets.starPng} alt="Half star" width={16} height={16} style={{ opacity: 0.5 }} />
+        )}
+        {Array.from({ length: emptyStars }).map((_, i) => (
+          <Image key={`empty-${i}`} src={assets.starPng} alt="Empty star" width={16} height={16} style={{ opacity: 0.3 }} />
+        ))}
+      </>
+    );
+  };
+
   return (
     <section id="about" className="about-section">
       <div className="about-container">
-        <div className="about-content">
-          <div className="about-column">
-            <h2 className="about-title">
-              Our Programs
-            </h2>
-            <p className="about-text">
-              At Workforce Institute, we empower professionals to advance their careers in high-demand fields through hands-on, project-driven learning. Our online training programs offer affordable pathways to valuable careers, providing:
-            </p>
-            <ul className="about-list">
-              <li className="about-list-item">
-                <span className="about-list-check">✓</span>
-                <p className="about-list-text">
-                  Get unlimited design inspirations. Level up your design.
-                </p>
-              </li>
-              <li className="about-list-item">
-                <span className="about-list-check">✓</span>
-                <p className="about-list-text">
-                  14+ Premium tailwind UI kits. Start with unlimited product downloads.
-                </p>
-              </li>
-            </ul>
-            <button className="about-button">
+        {/* Header Section */}
+        <div className="about-header">
+          <h2 className="about-title">
+            What Our Graduates Are Saying
+          </h2>
+          <p className="about-description">
+            Plus, Workforce Institute provides comprehensive career support services to students after program completion. Contact our team today to discover the perfect program for your goals
+          </p>
+        </div>
+
+        {/* Testimonial Card with Tabs */}
+        <div className="about-testimonial-card">
+          {/* Decorative Elements */}
+          <div className="about-decor about-decor-left">
+            <Image src={assets.ellipseDecor1} alt="decoration" fill className="object-contain" />
+          </div>
+       
+
+          {/* Tab Buttons */}
+          <div className="about-tabs">
+            <button
+              className={`about-tab ${activeTab === 'ui-ux' ? 'about-tab-active' : ''}`}
+              onClick={() => setActiveTab('ui-ux')}
+            >
+              UI UX Design
+            </button>
+            <button
+              className={`about-tab ${activeTab === 'ai-generative' ? 'about-tab-active' : ''}`}
+              onClick={() => setActiveTab('ai-generative')}
+            >
+              AI Generetive
+            </button>
+            <button
+              className={`about-tab ${activeTab === 'ai-software' ? 'about-tab-active' : ''}`}
+              onClick={() => setActiveTab('ai-software')}
+            >
+              AI for Software Engineers
+            </button>
+            <button
+              className={`about-tab ${activeTab === 'digital-marketing' ? 'about-tab-active' : ''}`}
+              onClick={() => setActiveTab('digital-marketing')}
+            >
+              Digital Marketing
+            </button>
+          </div>
+
+          {/* Quote Icon */}
+          <div className="about-quote-icon">
+          <img src="/images/testimonial-qoute.png" alt="quote icon" />
+          </div>
+
+          {/* Testimonial Slider */}
+          <div className="about-testimonial-slider-wrapper">
+            <Slider
+              ref={testimonialSliderRef}
+              dots={false}
+              infinite={true}
+              speed={500}
+              slidesToShow={1}
+              slidesToScroll={1}
+              arrows={false}
+              autoplay={true}
+              autoplaySpeed={autoplaySpeed}
+              pauseOnHover={false}
+              centerMode={false}
+              fade={true}
+              cssEase="linear"
+              afterChange={handleAfterChange}
+            >
+              {currentTestimonials.map((testimonial, index) => (
+                <div key={index} className="about-testimonial-uiux">
+                  {/* Testimonial Text */}
+                  <p className="about-testimonial-text">
+                    {testimonial.text}
+                  </p>
+
+                  {/* User Info Card */}
+                  <div className="about-user-card">
+                    <div className="about-user-info">
+                      <div className="about-user-avatar">
+                        <Image
+                          src={testimonial.avatar}
+                          alt={testimonial.name}
+                          width={48}
+                          height={48}
+                          className="about-avatar-img"
+                        />
+                      </div>
+                      <div className="about-user-details">
+                        <p className="about-user-name">{testimonial.name}</p>
+                        <p className="about-user-program">{testimonial.program}</p>
+                      </div>
+                    </div>
+                    <div className="about-rating">
+                      <div className="about-stars">
+                        {renderStars(testimonial.rating)}
+                      </div>
+                      <p className="about-rating-text">{testimonial.rating}/ 5</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          </div>
+  
+          {/* Progress Bar */}
+          <div className="about-progress-bar">
+            <div 
+              key={progressKey}
+              className="about-progress-bar-fill" 
+            />
+          </div>
+        </div>
+
+        {/* Navigation Buttons */}
+        <div className="about-bottom-nav">
+          <button className="about-nav-button" onClick={goToPrevious} aria-label="Previous">
+            <ArrowLeft className="about-nav-icon" />
+          </button>
+          <button className="about-nav-button" onClick={goToNext} aria-label="Next">
+            <ArrowRightNav className="about-nav-icon" />
+          </button>
+        </div>
+
+        {/* Bottom Section */}
+        <div className="about-bottom">
+          <div className="about-bottom-content">
+            <div className="about-bottom-text">
+              <p>How marketing leaders and their teams use</p>
+              <p>Jasper to generate incredible value.</p>
+            </div>
+            <button className="about-bottom-button">
               Explore More Stories
             </button>
           </div>
-          <div className="about-column">
-            <h3 className="about-subtitle">
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Integrations Section
+function IntegrationsSection() {
+  return (
+    <section id="integrations" className="integrations-section">
+      <div className="integrations-container">
+        <div className="integrations-content">
+          {/* Left Column: Bento Card with Image */}
+          <div className="integrations-card">
+            <div className="integrations-card-image-wrapper">
+              <Image
+                src={assets.futuristicHandDesign}
+                alt="Futuristic hand design"
+                fill
+                className="integrations-card-image"
+              />
+            </div>
+            <div className="integrations-card-content">
+              <h3 className="integrations-card-title">
+                Meet Jasper right in your tech stack
+              </h3>
+              <p className="integrations-card-description">
+                Interface with Jasper from within your tech stack using one of our many integrations.
+              </p>
+              <button className="integrations-card-button" type="button">
+                Explore Integrations
+              </button>
+            </div>
+          </div>
+
+          {/* Right Column: Text Content */}
+          <div className="integrations-text-column">
+            <h2 className="integrations-title">
               The all-in-one career companion
-            </h3>
-            <p className="about-subtext">
+            </h2>
+            <p className="integrations-description">
               It&apos;s a crowded market, but we know the way. Cut through the fear with a companion by your side. Get access to expert knowledge that others don&apos;t have.
             </p>
-            <button className="about-button">
+            <button className="integrations-button" type="button">
               Explore Customer Stories
             </button>
           </div>
@@ -535,49 +865,36 @@ function AboutSection() {
   );
 }
 
-// Testimonials Section
-function TestimonialsSection() {
+// AI Platform Section
+function AIPlatformSection() {
   return (
-    <section id="testimonials" className="testimonials-section">
-      <div className="testimonials-container">
-        <h2 className="testimonials-title">
-          What Our Graduates Are Saying
-        </h2>
-
-        {/* Testimonial Card */}
-        <div className="testimonials-card">
-          {/* Decorative Elements */}
-          <div className="testimonials-decor testimonials-decor-left">
-            <Image src={assets.ellipseDecor1} alt="decoration" fill className="object-contain" />
-          </div>
-          <div className="testimonials-decor testimonials-decor-right">
-            <Image src={assets.ellipseDecor3} alt="decoration" fill className="object-contain" />
-          </div>
-
-          {/* Content */}
-          <div className="testimonials-content">
-            {/* Program Tabs */}
-            <div className="testimonials-tabs">
-              <span className="testimonials-tab">UI UX Design</span>
-              <span className="testimonials-tab">AI Generetive</span>
-              <span className="testimonials-tab">AI for Software Engineers</span>
-              <span className="testimonials-tab-active">Digital Marketing</span>
-            </div>
-
-            {/* Quote Icon */}
-            <div className="testimonials-quote-icon">
-              <QuoteIconLarge />
-            </div>
-
-            {/* Testimonial Text */}
-            <p className="testimonials-text">
-              &quot;I appreciated how they matched my personality type with the right program. The bootcamp was challenging but exactly what I needed.&quot;
+    <section id="ai-platform" className="ai-platform-section">
+      <div className="ai-platform-container">
+        <div className="ai-platform-content">
+          {/* Left Column: Text Content */}
+          <div className="ai-platform-text-column">
+            <h2 className="ai-platform-title">
+              Seamlessly bring AI into
+              <br />
+              your platform or product
+            </h2>
+            <p className="ai-platform-description">
+              Call the Jasper API to create custom content or manipulate images – the only limit is your imagination.
             </p>
+            <button className="ai-platform-button" type="button">
+              Explore Topics
+            </button>
+          </div>
 
-           
-
-            {/* Progress Bar */}
-            <div className="testimonials-progress" />
+          {/* Right Column: Illustration */}
+          <div className="ai-platform-illustration">
+            <Image
+              src={assets.aiPlatformIllustration}
+              alt="AI platform integration illustration"
+              width={423}
+              height={332}
+              className="ai-platform-illustration-img"
+            />
           </div>
         </div>
       </div>
@@ -662,15 +979,7 @@ function BlogSection() {
       <div className="blog-container">
         {/* Featured Blog Post */}
         <div className="blog-featured">
-          <div className="blog-featured-image">
-            <Image
-              src={assets.blogFeatured}
-              alt="Featured blog"
-              fill
-              className="object-cover rounded-lg"
-            />
-          </div>
-          <div className="blog-featured-content">
+        <div className="blog-featured-content">
             <h2 className="blog-featured-title">
               Future of ai in software development
             </h2>
@@ -682,6 +991,15 @@ function BlogSection() {
               <ArrowContinue className="blog-featured-link-icon" />
             </a>
           </div>
+          <div className="blog-featured-image">
+            <Image
+              src={assets.blogFeatured}
+              alt="Featured blog"
+              fill
+              className="object-cover rounded-lg"
+            />
+          </div>
+       
         </div>
 
         {/* Blog Posts List */}
@@ -731,7 +1049,8 @@ export default function HomeSections() {
       <FeaturedProgramSection />
       <ProgramsSection />
       <AboutSection />
-      <TestimonialsSection />
+      <IntegrationsSection />
+      <AIPlatformSection />
       <StatsSection />
       <CTASection />
       <BlogSection />
