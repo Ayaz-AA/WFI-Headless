@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRef, useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import { assets } from '@/lib/assets';
-import { ArrowRight, ArrowLeft, ArrowRightNav, QuoteIconLarge, ArrowContinue, CheckCircle } from '@/components/icons';
+import { ArrowRight, ArrowLeft, ArrowRightNav, ArrowContinue, CheckCircle } from '@/components/icons';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -271,7 +271,7 @@ function ProgramsSection() {
     }
   };
 
-  const handleAfterChange = (current: number) => {
+  const handleAfterChange = () => {
     markEdgeSlides();
   };
 
@@ -631,8 +631,6 @@ function AboutSection() {
 
   const currentTestimonials = testimonials[activeTab];
 
-  const tabs: Array<'ui-ux' | 'ai-generative' | 'ai-software' | 'digital-marketing'> = ['ui-ux', 'ai-generative', 'ai-software', 'digital-marketing'];
-
   const goToPrevious = () => {
     testimonialSliderRef.current?.slickPrev();
   };
@@ -725,7 +723,7 @@ function AboutSection() {
 
           {/* Quote Icon */}
           <div className="about-quote-icon">
-          <img src="/images/testimonial-qoute.png" alt="quote icon" />
+          <Image src="/images/testimonial-qoute.png" alt="quote icon" width={48} height={48} />
           </div>
 
           {/* Testimonial Slider */}
