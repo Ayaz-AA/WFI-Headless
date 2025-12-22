@@ -9,7 +9,6 @@ const nextConfig: NextConfig = {
         pathname: '/api/mcp/asset/**',
       },
     ],
-    // Allow unoptimized images during development if assets are missing
     unoptimized: process.env.NODE_ENV === 'development',
   },
 };

@@ -1,6 +1,5 @@
 import { GraphQLClient } from 'graphql-request';
 
-// GraphQL endpoint
 const GRAPHQL_ENDPOINT = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT || 'https://backend.workforceinstitute.io/graphql';
 
 export const graphqlClient = new GraphQLClient(GRAPHQL_ENDPOINT, {
@@ -9,7 +8,6 @@ export const graphqlClient = new GraphQLClient(GRAPHQL_ENDPOINT, {
   },
 });
 
-// Menu item type
 export interface MenuItem {
   id: string;
   label: string;
@@ -20,7 +18,6 @@ export interface MenuItem {
   children?: MenuItem[];
 }
 
-// GraphQL query to fetch menu
 const GET_MENU_QUERY = `
   query GetMainMenu {
     menuItems(where: { location: MAIN_MENU }) {
@@ -36,7 +33,6 @@ const GET_MENU_QUERY = `
   }
 `;
 
-// Function to fetch menu
 export async function getMenu(): Promise<MenuItem[]> {
   try {
     const data = await graphqlClient.request(GET_MENU_QUERY);
@@ -50,7 +46,6 @@ export async function getMenu(): Promise<MenuItem[]> {
   }
 }
 
-// Raw menu item node from GraphQL response
 interface RawMenuItemNode {
   id: string;
   label: string;
@@ -60,12 +55,10 @@ interface RawMenuItemNode {
   order?: number;
 }
 
-// Transform menu items to our format
 function transformMenuItems(nodes: RawMenuItemNode[]): MenuItem[] {
   const items: MenuItem[] = [];
   const itemMap = new Map<string, MenuItem>();
 
-  // Sort by order if available
   const sortedNodes = [...nodes].sort((a, b) => {
     if (a.order !== undefined && b.order !== undefined) {
       return a.order - b.order;
@@ -73,7 +66,6 @@ function transformMenuItems(nodes: RawMenuItemNode[]): MenuItem[] {
     return 0;
   });
 
-  // First pass: create all items
   sortedNodes.forEach((node) => {
     const item: MenuItem = {
       id: node.id,
@@ -86,11 +78,9 @@ function transformMenuItems(nodes: RawMenuItemNode[]): MenuItem[] {
     itemMap.set(node.id, item);
   });
 
-  // Second pass: build hierarchy and collect root items
   sortedNodes.forEach((node) => {
     const item = itemMap.get(node.id)!;
     
-    // Find children by checking parentId
     const children = sortedNodes
       .filter((n) => n.parentId === node.id)
       .map((child) => itemMap.get(child.id)!)
@@ -105,7 +95,6 @@ function transformMenuItems(nodes: RawMenuItemNode[]): MenuItem[] {
       item.children = children;
     }
     
-    // Root items have no parentId
     if (!node.parentId) {
       items.push(item);
     }

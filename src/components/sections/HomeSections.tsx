@@ -10,7 +10,6 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const HERO_CIRCULAR_TEXT = 'OUR GRADUATES TRUST US';
 
-// Hero Section
 function HeroSection() {
   return (
     <section className="hero-section">
@@ -96,16 +95,13 @@ function HeroEarCircularText() {
   );
 }
 
-// Partners Section
 function PartnersSection() {
   return (
     <section className="partners-section">
       <div className="partners-container">
      
 
-        {/* Main Content */}
         <div className="partners-content">
-          {/* Left Column: Title and Description */}
           <div className="partners-text-column">
             <h2 className="partners-title">
               Top university partners
@@ -115,7 +111,6 @@ function PartnersSection() {
             </p>
           </div>
 
-          {/* Right Column: Checkmark Items */}
           <div className="partners-features">
             <div className="partners-feature-item">
               <CheckCircle className="partners-check-icon" />
@@ -132,7 +127,6 @@ function PartnersSection() {
           </div>
         </div>
 
-        {/* Partners Logos */}
         <div className="partners-list">
           {assets.partnerLogos.map((partner, index) => (
             <a
@@ -180,7 +174,6 @@ function HeroTrustSignal() {
   );
 }
 
-// Stats Section
 function StatsSection() {
   const stats = [
     { value: '12M', label: 'Resumes created' },
@@ -209,7 +202,6 @@ function StatsSection() {
   );
 }
 
-// Programs Section
 function ProgramsSection() {
   const sliderRef = useRef<Slider>(null);
 
@@ -247,7 +239,6 @@ function ProgramsSection() {
   ];
 
   const markEdgeSlides = () => {
-    // Remove edge classes from all slides
     const carousel = document.querySelector('.programs-carousel');
     if (carousel) {
       const slides = carousel.querySelectorAll('.slick-slide');
@@ -255,7 +246,6 @@ function ProgramsSection() {
         slide.classList.remove('slick-edge');
       });
       
-      // Find center slide and mark adjacent slides as edges
       const centerSlide = carousel.querySelector('.slick-slide.slick-center');
       if (centerSlide) {
         const prevSlide = centerSlide.previousElementSibling as HTMLElement;
@@ -332,7 +322,6 @@ function ProgramsSection() {
   };
 
   useEffect(() => {
-    // Mark edge slides after slider initializes
     const timer = setTimeout(() => {
       markEdgeSlides();
     }, 300);
@@ -342,14 +331,12 @@ function ProgramsSection() {
   return (
     <section id="programs" className="programs-section">
       <div className="programs-container">
-        {/* Section Header */}
         <div className="programs-header">
           <h2 className="programs-title">
             <span className="programs-title-span">Our Programs</span>
           </h2>
         </div>
 
-        {/* Programs List */}
         <div className="programs-list-wrapper">
           <div className="programs-list">
             <Slider
@@ -385,10 +372,9 @@ function ProgramsSection() {
                   </a>
                 </div>
               </div>
-            ))}
+            )            )}
             </Slider>
 
-            {/* Navigation Arrows */}
             <div className="programs-nav">
               <button 
                 className="programs-nav-button"
@@ -413,7 +399,6 @@ function ProgramsSection() {
   );
 }
 
-// Featured Program Section
 function FeaturedProgramSection() {
   const testimonials = [
     {
@@ -436,7 +421,6 @@ function FeaturedProgramSection() {
     <section className="featured-program-section">
       <div className="featured-program-container">
         <div className="programs-featured">
-          {/* Top Section: Title, Description, and Button */}
           <div className="programs-featured-header">
             <div className="programs-featured-header-left">
               <h2 className="programs-featured-title">
@@ -527,7 +511,6 @@ function FeaturedProgramSection() {
   );
 }
 
-// About Section
 function AboutSection() {
   const [activeTab, setActiveTab] = useState<'ui-ux' | 'ai-generative' | 'ai-software' | 'digital-marketing'>('ui-ux');
   const testimonialSliderRef = useRef<Slider>(null);
@@ -639,17 +622,15 @@ function AboutSection() {
     testimonialSliderRef.current?.slickNext();
   };
 
-  // Reset slider when tab changes
   useEffect(() => {
     if (testimonialSliderRef.current) {
       testimonialSliderRef.current.slickGoTo(0);
     }
-    setProgressKey(prev => prev + 1); // Reset progress animation when tab changes
+    setProgressKey(prev => prev + 1);
   }, [activeTab]);
 
-  // Reset progress animation when slider changes
   const handleAfterChange = () => {
-    setProgressKey(prev => prev + 1); // Restart animation
+    setProgressKey(prev => prev + 1);
   };
 
   const renderStars = (rating: number) => {
@@ -675,7 +656,6 @@ function AboutSection() {
   return (
     <section id="about" className="about-section">
       <div className="about-container">
-        {/* Header Section */}
         <div className="about-header">
           <h2 className="about-title">
             What Our Graduates Are Saying
@@ -685,15 +665,12 @@ function AboutSection() {
           </p>
         </div>
 
-        {/* Testimonial Card with Tabs */}
         <div className="about-testimonial-card">
-          {/* Decorative Elements */}
           <div className="about-decor about-decor-left">
             <Image src={assets.ellipseDecor1} alt="decoration" fill className="object-contain" />
           </div>
        
 
-          {/* Tab Buttons */}
           <div className="about-tabs">
             <button
               className={`about-tab ${activeTab === 'ui-ux' ? 'about-tab-active' : ''}`}
@@ -721,12 +698,10 @@ function AboutSection() {
             </button>
           </div>
 
-          {/* Quote Icon */}
           <div className="about-quote-icon">
           <Image src="/images/testimonial-qoute.png" alt="quote icon" width={48} height={48} />
           </div>
 
-          {/* Testimonial Slider */}
           <div className="about-testimonial-slider-wrapper">
             <Slider
               ref={testimonialSliderRef}
@@ -746,12 +721,10 @@ function AboutSection() {
             >
               {currentTestimonials.map((testimonial, index) => (
                 <div key={index} className="about-testimonial-uiux">
-                  {/* Testimonial Text */}
                   <p className="about-testimonial-text">
                     {testimonial.text}
                   </p>
 
-                  {/* User Info Card */}
                   <div className="about-user-card">
                     <div className="about-user-info">
                       <div className="about-user-avatar">
@@ -780,7 +753,6 @@ function AboutSection() {
             </Slider>
           </div>
   
-          {/* Progress Bar */}
           <div className="about-progress-bar">
             <div 
               key={progressKey}
@@ -789,7 +761,6 @@ function AboutSection() {
           </div>
         </div>
 
-        {/* Navigation Buttons */}
         <div className="about-bottom-nav">
           <button className="about-nav-button" onClick={goToPrevious} aria-label="Previous">
             <ArrowLeft className="about-nav-icon" />
@@ -799,7 +770,6 @@ function AboutSection() {
           </button>
         </div>
 
-        {/* Bottom Section */}
         <div className="about-bottom">
           <div className="about-bottom-content">
             <div className="about-bottom-text">
@@ -816,13 +786,11 @@ function AboutSection() {
   );
 }
 
-// Integrations Section
 function IntegrationsSection() {
   return (
     <section id="integrations" className="integrations-section">
       <div className="integrations-container">
         <div className="integrations-content">
-          {/* Left Column: Bento Card with Image */}
           <div className="integrations-card">
             <div className="integrations-card-image-wrapper">
               <Image
@@ -845,7 +813,6 @@ function IntegrationsSection() {
             </div>
           </div>
 
-          {/* Right Column: Text Content */}
           <div className="integrations-text-column">
             <h2 className="integrations-title">
               The all-in-one career companion
@@ -863,13 +830,11 @@ function IntegrationsSection() {
   );
 }
 
-// AI Platform Section
 function AIPlatformSection() {
   return (
     <section id="ai-platform" className="ai-platform-section">
       <div className="ai-platform-container">
         <div className="ai-platform-content">
-          {/* Left Column: Text Content */}
           <div className="ai-platform-text-column">
             <h2 className="ai-platform-title">
               Seamlessly bring AI into
@@ -884,7 +849,6 @@ function AIPlatformSection() {
             </button>
           </div>
 
-          {/* Right Column: Illustration */}
           <div className="ai-platform-illustration">
             <Image
               src={assets.aiPlatformIllustration}
@@ -900,15 +864,11 @@ function AIPlatformSection() {
   );
 }
 
-
-
-// CTA Section
 function CTASection() {
   return (
     <section className="cta-section">
       <div className="cta-container">
         <div className="cta-content">
-          {/* Left Content */}
           <div className="cta-column">
             <h2 className="cta-title">
               Faster outputs.
@@ -917,7 +877,6 @@ function CTASection() {
             </h2>
           </div>
 
-          {/* Right Content */}
           <div className="cta-column-spaced">
             <p className="cta-text">
               Come see why leading businesses chose Jasper for better results using artificial intelligence.
@@ -937,7 +896,6 @@ function CTASection() {
   );
 }
 
-// Blog Section
 function BlogSection() {
   const blogPosts = [
     {
@@ -975,7 +933,6 @@ function BlogSection() {
   return (
     <section id="blogs" className="blog-section">
       <div className="blog-container">
-        {/* Featured Blog Post */}
         <div className="blog-featured">
         <div className="blog-featured-content">
             <h2 className="blog-featured-title">
@@ -1000,7 +957,6 @@ function BlogSection() {
        
         </div>
 
-        {/* Blog Posts List */}
         <div className="blog-list">
           {blogPosts.map((post, index) => (
             <div
@@ -1038,7 +994,6 @@ function BlogSection() {
   );
 }
 
-// Main export component
 export default function HomeSections() {
   return (
     <>

@@ -1,8 +1,3 @@
-/**
- * Inline SVG Icons
- * All icons are defined as React components for better performance and customization
- */
-
 export const ArrowRight = ({ className = "w-3 h-3" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>

@@ -6,7 +6,6 @@ export default function Footer() {
     <footer className="bg-white border-t border-gray-200">
       <div className="max-w-[1440px] mx-auto px-8 py-16">
         <div className="flex flex-wrap gap-12 md:gap-16 mb-12">
-          {/* Logo and Description */}
           <div className="flex-1 min-w-[220px] max-w-[364px]">
             <div className="h-[32px] w-[111px] mb-6 relative">
               <Image 
@@ -21,7 +20,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Programs */}
           <div className="flex-1 min-w-[180px]">
             <h4 className="text-black text-sm font-bold mb-4">Programs</h4>
             <ul className="space-y-2.5">
@@ -48,7 +46,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company */}
           <div className="flex-1 min-w-[180px]">
             <h4 className="text-black text-sm font-bold mb-4">Company</h4>
             <ul className="space-y-2.5">
@@ -75,7 +72,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Resources */}
           <div className="flex-1 min-w-[180px]">
             <h4 className="text-black text-sm font-bold mb-4">Resources</h4>
             <ul className="space-y-2.5">
@@ -103,7 +99,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Section */}
         <div className="border-t border-gray-200 pt-4 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-[#6a7282] text-[13px]">
             © 2025 Workforce Institute. All rights reserved.

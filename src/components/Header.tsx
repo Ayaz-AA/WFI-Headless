@@ -12,12 +12,10 @@ export default function Header() {
   useEffect(() => {
     async function fetchMenu() {
       try {
-        // Fetch menu using MAIN_MENU location (as shown in the GraphQL query)
         const items = await getMenu();
         if (items.length > 0) {
           setMenuItems(items);
         } else {
-          // Fallback to default menu items if no items returned
           setMenuItems([
             { id: '1', label: 'Programs', url: '#programs', path: '#programs' },
             { id: '2', label: 'About Us', url: '#about', path: '#about' },
@@ -28,7 +26,6 @@ export default function Header() {
         }
       } catch (error) {
         console.error('Failed to load menu:', error);
-        // Fallback to default menu items if GraphQL fails
         setMenuItems([
           { id: '1', label: 'Programs', url: '#programs', path: '#programs' },
           { id: '2', label: 'About Us', url: '#about', path: '#about' },
@@ -44,18 +41,14 @@ export default function Header() {
     fetchMenu();
   }, []);
 
-  // Helper function to get relative path from WordPress URL
   const getRelativePath = (url: string): string => {
     try {
       const urlObj = new URL(url);
-      // If it's the same domain, return the pathname
       if (urlObj.hostname === 'backend.workforceinstitute.io' || urlObj.hostname === 'workforceinstitute.io') {
         return urlObj.pathname + urlObj.search + urlObj.hash;
       }
-      // If it's external, return the full URL
       return url;
     } catch {
-      // If URL parsing fails, return as is (might be a relative path already)
       return url;
     }
   };
@@ -63,7 +56,6 @@ export default function Header() {
   return (
     <header className="bg-white border-b border-gray-100 sticky top-0 z-50 h-[77px]">
       <div className="max-w-[1440px] mx-auto h-full flex items-center justify-between px-10">
-        {/* Logo */}
         <div className="h-[42px] w-[146px] relative">
           <Image 
             src={assets.wfiLogo} 
@@ -74,7 +66,6 @@ export default function Header() {
           />
         </div>
 
-        {/* Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           {loading ? (
             <div className="text-[#101828] text-base">Loading...</div>
@@ -89,7 +80,6 @@ export default function Header() {
               </a>
             ))
           ) : (
-            // Fallback menu if no items loaded
             <>
               <a href="#programs" className="text-[#101828] text-base font-normal hover:text-[#d46527] transition-colors">
                 Programs
@@ -110,7 +100,6 @@ export default function Header() {
           )}
         </nav>
 
-        {/* CTA Button */}
         <button className="border border-[#d46527] border-solid h-[48px] rounded-[5px] px-5 font-medium text-[#d46527] text-sm hover:bg-[#d46527] hover:text-white transition-colors">
           Get Started
         </button>

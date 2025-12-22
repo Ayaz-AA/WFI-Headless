@@ -1,13 +1,6 @@
-/**
- * Asset paths mapping
- * All assets should be stored in public folder
- */
-
 export const assets = {
-  // Logo
   wfiLogo: '/logos/wfi-logo.png',
   
-  // Hero Section
   heroMain: '/images/homevideo.mp4',
   mainbannerimage: '/images/mainbannerimage.png',
   userAvatar1: '/images/user-avatar-1.png',
@@ -17,7 +10,6 @@ export const assets = {
   lineDecor: '/icons/line-decor.svg',
   arrowRight: '/icons/arrow-right.svg',
   
-  // Programs Section
   programVideoThumb: '/images/program-video-thumb.jpg',
   quoteIcon: '/icons/quote-icon.svg',
   line52: '/icons/line-52.svg',
@@ -30,7 +22,6 @@ export const assets = {
   programDigitalMarketing1: '/images/program-digital-marketing-1.jpg',
   programDigitalMarketing2: '/images/program-digital-marketing-2.jpg',
   
-  // Testimonials Section
   testimonialAvatar: '/images/testimonial-avatar.png',
   starFilled: '/icons/star-filled.svg',
   starHalf: '/icons/star-half.svg',
@@ -41,40 +32,36 @@ export const assets = {
   ellipseDecor3: '/images/ellipse-decor-3.png',
   ellipseDecor4: '/images/ellipse-decor-4.png',
   
-  // Partners Section
   partnerLineDecor: '/icons/partner-line-decor.svg',
   partnerLogos: [
     {
       logo: '/logos/partner-logo-1.png',
-      link: '#', // Add your partner link here
+      link: '#',
       alt: 'Partner 1',
     },
     {
       logo: '/logos/partner-logo-2.png',
-      link: '#', // Add your partner link here
+      link: '#',
       alt: 'Partner 2',
     },
     {
       logo: '/logos/partner-logo-3.png',
-      link: '#', // Add your partner link here
+      link: '#',
       alt: 'Partner 3',
     },
     {
       logo: '/logos/partner-logo-4.png',
-      link: '#', // Add your partner link here
+      link: '#',
       alt: 'Partner 4',
     },
   ],
   
-  // Blog Section
   blogThumb: '/images/blog-thumb-1.jpg',
   blogFeatured: '/images/blog-featured.jpg',
   arrowContinue: '/icons/arrow-continue.svg',
   
-  // Integrations Section
   futuristicHandDesign: '/images/futuristic-hand-design-1.png',
   
-  // AI Platform Section
   aiPlatformIllustration: '/images/undraw_chat-with-ai_ir62 1.png',
 } as const;
 

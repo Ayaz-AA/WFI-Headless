@@ -1,10 +1,4 @@
-/**
- * Design System - Reusable styling tokens and utilities
- * Based on Figma design specifications
- */
-
 export const colors = {
-  // Primary colors
   primary: {
     orange: '#d46527',
     blue: '#224dd0',
@@ -13,7 +7,6 @@ export const colors = {
       to: '#f09819',
     },
   },
-  // Text colors
   text: {
     primary: '#2f2b24',
     secondary: '#364153',
@@ -22,7 +15,6 @@ export const colors = {
     light: '#888d90',
     white: '#ffffff',
   },
-  // Background colors
   background: {
     white: '#ffffff',
     light: '#f7f9fc',
@@ -30,14 +22,12 @@ export const colors = {
     gray: '#f2f2f2',
     dark: '#090914',
   },
-  // Border colors
   border: {
     default: '#dcd9d0',
     light: '#e5e7eb',
     dark: '#2f2b24',
     gray: '#d46527',
   },
-  // Status colors
   status: {
     success: '#2563eb',
     warning: '#f09819',
@@ -116,7 +106,6 @@ export const breakpoints = {
   '2xl': '1440px',
 } as const;
 
-// Reusable component styles
 export const buttonStyles = {
   primary: 'bg-white border-2 border-solid border-white text-[#2f2b24] rounded-[5px] px-5 py-3 font-medium text-sm',
   secondary: 'border border-[#2f2b24] border-solid text-[#2f2b24] rounded-[5px] px-5 py-3 font-medium text-sm',
