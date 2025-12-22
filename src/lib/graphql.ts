@@ -50,8 +50,18 @@ export async function getMenu(): Promise<MenuItem[]> {
   }
 }
 
+// Raw menu item node from GraphQL response
+interface RawMenuItemNode {
+  id: string;
+  label: string;
+  url: string;
+  path: string;
+  parentId: string | null;
+  order?: number;
+}
+
 // Transform menu items to our format
-function transformMenuItems(nodes: any[]): MenuItem[] {
+function transformMenuItems(nodes: RawMenuItemNode[]): MenuItem[] {
   const items: MenuItem[] = [];
   const itemMap = new Map<string, MenuItem>();
 

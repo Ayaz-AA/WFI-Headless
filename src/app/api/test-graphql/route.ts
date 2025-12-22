@@ -10,11 +10,16 @@ export async function GET() {
       count: menuItems.length,
       message: 'GraphQL connection successful! Main menu loaded.' 
     });
-  } catch (error: any) {
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorDetails = error && typeof error === 'object' && 'response' in error 
+      ? (error as { response?: { errors?: unknown } }).response?.errors || error
+      : error;
+    
     return NextResponse.json({ 
       success: false, 
-      error: error.message,
-      details: error.response?.errors || error,
+      error: errorMessage,
+      details: errorDetails,
       message: 'GraphQL connection failed. Please check if WPGraphQL is installed and the endpoint is correct.' 
     }, { status: 500 });
   }
