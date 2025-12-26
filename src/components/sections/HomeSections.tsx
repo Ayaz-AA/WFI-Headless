@@ -5,12 +5,15 @@ import { useRef, useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import { assets } from '@/lib/assets';
 import { ArrowRight, ArrowLeft, ArrowRightNav, ArrowContinue, CheckCircle } from '@/components/icons';
+import { SignupModal } from '@/components/SignupModal';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const HERO_CIRCULAR_TEXT = 'OUR GRADUATES TRUST US';
 
 function HeroSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section className="hero-section">
       <div className="hero-container">
@@ -20,10 +23,7 @@ function HeroSection() {
 
         <div className="hero-grid">
           <div className="hero-text-column">
-            <button className="hero-register-link" type="button">
-              Register Now
-              <ArrowRight className="hero-register-icon" />
-            </button>
+       
 
             <div className="hero-headline-group">
               <div className="hero-title-block" aria-label="Where innovation meets">
@@ -35,6 +35,14 @@ function HeroSection() {
                 Empowers professionals through expert-led training and career support.
               </p>
             </div>
+            <button 
+              className="hero-register-link" 
+              type="button"
+              onClick={() => setIsModalOpen(true)}
+            >
+              Register Now
+              <ArrowRight className="hero-register-icon" />
+            </button>
           </div>
           <div className="hero-image-frame">
             <Image
@@ -54,6 +62,7 @@ function HeroSection() {
           </div>
         </div>
       </div>
+      <SignupModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }
@@ -400,6 +409,8 @@ function ProgramsSection() {
 }
 
 function FeaturedProgramSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   const testimonials = [
     {
       id: 1,
@@ -436,7 +447,8 @@ function FeaturedProgramSection() {
               <p className="programs-featured-subtext">
                 All the features you need to take a secure, controlled & impactful approach to AI.
               </p>
-              <button className="programs-featured-button">
+              <button className="programs-featured-button"    type="button"
+              onClick={() => setIsModalOpen(true)}>
                 Explore More Here
               </button>
             </div>
@@ -507,6 +519,7 @@ function FeaturedProgramSection() {
           </Slider>
         </div>
       </div>
+      <SignupModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }
@@ -515,6 +528,7 @@ function AboutSection() {
   const [activeTab, setActiveTab] = useState<'ui-ux' | 'ai-generative' | 'ai-software' | 'digital-marketing'>('ui-ux');
   const testimonialSliderRef = useRef<Slider>(null);
   const [progressKey, setProgressKey] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const autoplaySpeed = 3000; // 3 seconds
 
   const testimonials = {
@@ -776,17 +790,20 @@ function AboutSection() {
               <p>How marketing leaders and their teams use</p>
               <p>Jasper to generate incredible value.</p>
             </div>
-            <button className="about-bottom-button">
+            <button className="about-bottom-button" type="button" onClick={() => setIsModalOpen(true)}>
               Explore More Stories
             </button>
           </div>
         </div>
       </div>
+      <SignupModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }
 
 function IntegrationsSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   return (
     <section id="integrations" className="integrations-section">
       <div className="integrations-container">
@@ -807,7 +824,7 @@ function IntegrationsSection() {
               <p className="integrations-card-description">
                 Interface with Jasper from within your tech stack using one of our many integrations.
               </p>
-              <button className="integrations-card-button" type="button">
+              <button className="integrations-card-button" type="button" onClick={() => setIsModalOpen(true)}>
                 Explore Integrations
               </button>
             </div>
@@ -820,17 +837,20 @@ function IntegrationsSection() {
             <p className="integrations-description">
               It&apos;s a crowded market, but we know the way. Cut through the fear with a companion by your side. Get access to expert knowledge that others don&apos;t have.
             </p>
-            <button className="integrations-button" type="button">
+            <button className="integrations-button" type="button" onClick={() => setIsModalOpen(true)}>
               Explore Customer Stories
             </button>
           </div>
         </div>
       </div>
+      <SignupModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }
 
 function AIPlatformSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   return (
     <section id="ai-platform" className="ai-platform-section">
       <div className="ai-platform-container">
@@ -844,7 +864,7 @@ function AIPlatformSection() {
             <p className="ai-platform-description">
               Call the Jasper API to create custom content or manipulate images – the only limit is your imagination.
             </p>
-            <button className="ai-platform-button" type="button">
+            <button className="ai-platform-button" type="button" onClick={() => setIsModalOpen(true)}>
               Explore Topics
             </button>
           </div>
@@ -860,11 +880,14 @@ function AIPlatformSection() {
           </div>
         </div>
       </div>
+      <SignupModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }
 
 function CTASection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   return (
     <section className="cta-section">
       <div className="cta-container">
@@ -882,16 +905,17 @@ function CTASection() {
               Come see why leading businesses chose Jasper for better results using artificial intelligence.
             </p>
             <div className="cta-buttons">
-              <button className="cta-button cta-button-outline">
+              <button className="cta-button cta-button-outline" type="button" onClick={() => setIsModalOpen(true)}>
                 Start Free Trial
               </button>
-              <button className="cta-button cta-button-filled">
+              <button className="cta-button cta-button-filled" type="button" onClick={() => setIsModalOpen(true)}>
                 Get A Demo
               </button>
             </div>
           </div>
         </div>
       </div>
+      <SignupModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }

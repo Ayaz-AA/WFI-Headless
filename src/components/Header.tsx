@@ -4,10 +4,12 @@ import { assets } from '@/lib/assets';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { getMenu, type MenuItem } from '@/lib/graphql';
+import { SignupModal } from '@/components/SignupModal';
 
 export default function Header() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     async function fetchMenu() {
@@ -100,10 +102,11 @@ export default function Header() {
           )}
         </nav>
 
-        <button className="border border-[#d46527] border-solid h-[48px] rounded-[5px] px-5 font-medium text-[#d46527] text-sm hover:bg-[#d46527] hover:text-white transition-colors">
+        <button className="border border-[#d46527] border-solid h-[48px] rounded-[5px] px-5 font-medium text-[#d46527] text-sm hover:bg-[#d46527] hover:text-white transition-colors" type='button' onClick={() => setIsModalOpen(true)}>
           Get Started
         </button>
       </div>
+      <SignupModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </header>
   );
 }
