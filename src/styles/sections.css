@@ -2069,3 +2069,170 @@
     font-size: 1.5rem;
   }
 }
+
+/* =============================================================================
+   FAQ SECTION STYLES
+   ============================================================================= */
+
+.faq-section {
+  padding: 4rem 1rem;
+  background: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .faq-section {
+    padding: 6rem 2rem;
+  }
+}
+
+.faq-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.faq-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.faq-title {
+  font-family: var(--font-bayon), 'Arial Black', sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  color: #101828;
+  margin: 0;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.faq-item {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.faq-item:first-child {
+  border-top: 1px solid #e5e7eb;
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #101828;
+  transition: color 0.2s;
+}
+
+.faq-question:hover {
+  color: #d46527;
+}
+
+.faq-question-active {
+  color: #d46527;
+}
+
+.faq-icon {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+  color: #6b7280;
+}
+
+.faq-icon-rotated {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faq-answer-open {
+  max-height: 500px;
+  padding-bottom: 1.25rem;
+}
+
+.faq-answer p {
+  margin: 0;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #4a5565;
+}
+
+.faq-cta {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.faq-cta-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: #d46527;
+  color: white;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.faq-cta-button:hover {
+  background-color: #b8551f;
+  transform: translateY(-2px);
+}
+
+/* CTA Section Updates */
+.cta-subtitle {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 0.5rem;
+}
+
+/* Programs Featured Benefits */
+.programs-featured-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.programs-featured-benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.9rem;
+  color: #4a5565;
+}
+
+.programs-featured-benefit-icon {
+  width: 18px;
+  height: 18px;
+  color: #d46527;
+  flex-shrink: 0;
+}
+
+/* Programs Subtitle */
+.programs-subtitle {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1rem;
+  color: #4a5565;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}

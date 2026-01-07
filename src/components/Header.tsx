@@ -18,6 +18,7 @@ export default function Header() {
         if (items.length > 0) {
           setMenuItems(items);
         } else {
+          // Fallback navigation matching deployed site
           setMenuItems([
             { id: '1', label: 'Programs', url: '#programs', path: '#programs' },
             { id: '2', label: 'About Us', url: '#about', path: '#about' },
@@ -28,6 +29,7 @@ export default function Header() {
         }
       } catch (error) {
         console.error('Failed to load menu:', error);
+        // Fallback navigation matching deployed site
         setMenuItems([
           { id: '1', label: 'Programs', url: '#programs', path: '#programs' },
           { id: '2', label: 'About Us', url: '#about', path: '#about' },
