@@ -3,18 +3,18 @@
 // =============================================================================
 
 /**
- * Fetch homepage content from a WordPress "Homepage Settings" page
+ * Fetch homepage content from the WordPress "Home" page
  * This works with FREE ACF + WPGraphQL + WPGraphQL for ACF
  * 
- * The content is stored in a page with slug "homepage-settings"
+ * The content is stored in the existing "home" page
  * ACF fields are attached to that page and exposed via GraphQL
  */
 
-// Get homepage content from the "Homepage Settings" page
+// Get homepage content from the "Home" page
 // NOTE: Only query fields that actually exist in WordPress ACF
 export const GET_HOMEPAGE_CONTENT = `
   query GetHomepageContent {
-    page(id: "homepage-settings", idType: URI) {
+    page(id: "home", idType: URI) {
       homepageContent {
         heroTitleLine1
         heroTitleLine2

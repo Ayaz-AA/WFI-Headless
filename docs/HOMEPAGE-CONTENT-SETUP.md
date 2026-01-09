@@ -5,7 +5,7 @@ This guide shows how to make **ALL static homepage text** editable from WordPres
 ## 🎯 Overview
 
 Since you don't have ACF Pro (no Options Pages), we use a clever workaround:
-- Create a **"Homepage Settings"** page in WordPress
+- Use the existing **"Home"** page in WordPress
 - Attach ACF fields to that page
 - The frontend fetches that page's custom fields via GraphQL
 
@@ -116,19 +116,19 @@ Add the following fields to the field group:
 
 Under **Location** section:
 - **Show this field group if:**
-  - Page → is equal to → Homepage Settings
+  - Page → is equal to → Home
 
 Click **Publish** to save the field group.
 
 ---
 
-## Step 4: Create the "Homepage Settings" Page
+## Step 4: Use the Existing "Home" Page
 
-1. Go to **Pages → Add New**
-2. **Title:** `Homepage Settings`
-3. **Slug:** `homepage-settings` (important!)
+1. Go to **Pages → All Pages**
+2. Find and **Edit** the existing "Home" page
+3. Scroll down to see the ACF fields
 4. Fill in all the ACF fields with your content
-5. Click **Publish**
+5. Click **Update**
 
 ---
 
@@ -140,13 +140,13 @@ Run this query:
 
 ```graphql
 {
-  page(id: "homepage-settings", idType: URI) {
+  page(id: "home", idType: URI) {
     homepageContent {
       heroTitleLine1
       heroTitleLine2
       heroTitleLine3
       heroDescription
-      partnersTile
+      partnersTitle
       partnersDescription
       stat1Value
       stat1Label
@@ -163,7 +163,7 @@ You should see your content returned!
 
 ## 🔄 How Content Updates Work
 
-1. **Edit in WordPress:** Go to Pages → Homepage Settings → Edit
+1. **Edit in WordPress:** Go to Pages → Home → Edit
 2. **Change any field value**
 3. **Click Update**
 4. **Frontend updates automatically** within 60 seconds (ISR revalidation)
@@ -188,7 +188,7 @@ You should see your content returned!
 
 ## ⚠️ Important Notes
 
-1. **Page slug must be `homepage-settings`** - The GraphQL query looks for this exact slug
+1. **Page slug must be `home`** - The GraphQL query looks for this exact slug
 2. **ACF field names matter** - Use the exact field names shown above (with underscores)
 3. **Enable "Show in GraphQL"** for the field group
 4. **GraphQL Field Name: `homepageContent`** - Must match exactly
@@ -215,10 +215,11 @@ If WordPress data is unavailable, **fallback values are used** (the current hard
 - [ ] Enable "Show in GraphQL" 
 - [ ] Set GraphQL Field Name to `homepageContent`
 - [ ] Add all 43 fields (Hero, Partners, Training, Stats, Testimonials, CTA, Integrations, AI Platform)
-- [ ] Set location rule: Page → is equal to → Homepage Settings
-- [ ] Create page with slug `homepage-settings`
+- [ ] Set location rule: Page → is equal to → Home
+- [ ] Edit existing "Home" page (verify slug is `home`)
 - [ ] Fill in all field values
 - [ ] Test GraphQL query
 - [ ] Verify frontend displays content
+
 
 

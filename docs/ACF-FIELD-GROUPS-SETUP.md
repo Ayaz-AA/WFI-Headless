@@ -312,3 +312,4 @@ These sections already get their content from Custom Post Types:
 2. Check if ACF Pro is activated (not free version)
 3. Go to Settings → Permalinks and click Save (flush rewrite rules)
 
+
